@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Four Corners Architectural | Elevated Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header header--transparent">
+    <a href="index.html" class="header__logo">FOUR CORNERS</a>
+    <nav class="header__nav">
+      <a href="#about" class="header__link">About</a>
+      <div class="header__dropdown">
+        <a href="#products" class="header__link">Products</a>
+        <div class="header__dropdown-menu">
+          <a href="kolbe.html" class="header__dropdown-item">Kolbe</a>
+          <a href="lepage.html" class="header__dropdown-item">Lepage</a>
+          <a href="origin.html" class="header__dropdown-item">Origin</a>
+          <a href="quartz.html" class="header__dropdown-item">Quartz</a>
+        </div>
+      </div>
+      <a href="#projects" class="header__link">Projects</a>
+      <a href="contact.html" class="header__link">Contact</a>
+    </nav>
+    <button class="header__hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <nav class="mobile-nav">
+    <button class="mobile-nav__close" aria-label="Close menu">&times;</button>
+    <a href="#about" class="mobile-nav__link">About</a>
+    <a href="#products" class="mobile-nav__link">Products</a>
+    <a href="kolbe.html" class="mobile-nav__link">Kolbe</a>
+    <a href="lepage.html" class="mobile-nav__link">Lepage</a>
+    <a href="origin.html" class="mobile-nav__link">Origin</a>
+    <a href="quartz.html" class="mobile-nav__link">Quartz</a>
+    <a href="#projects" class="mobile-nav__link">Projects</a>
+    <a href="contact.html" class="mobile-nav__link">Contact</a>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <video
+      class="hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="assets/images/hero-fallback.jpg"
+    >
+      <source src="assets/video/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1 class="hero__title">Elevated Design</h1>
+      <p class="hero__subtitle">Premium windows and doors for the discerning homeowner — curated from the world's finest manufacturers.</p>
+      <a href="#products" class="btn btn-light">LEARN MORE</a>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCT LINES ===== -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="text-center">
+        <h2>Our Product Lines</h2>
+        <p class="subtitle">We represent four of the industry's most respected brands, each bringing a distinct approach to craftsmanship and innovation.</p>
+      </div>
+      <div class="products-grid fade-in">
+
+        <div class="product-card">
+          <div class="product-card__image">
+            <img src="assets/images/kolbe.jpg" alt="Kolbe Windows & Doors" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Kolbe</h3>
+            <p class="product-card__tagline">Crafted for those who demand the finest in design and performance.</p>
+            <a href="kolbe.html" class="product-card__link">EXPLORE &rarr;</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card__image">
+            <img src="assets/images/lepage.jpg" alt="Lepage Millwork" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Lepage</h3>
+            <p class="product-card__tagline">European engineering meets North American craftsmanship.</p>
+            <a href="lepage.html" class="product-card__link">EXPLORE &rarr;</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card__image">
+            <img src="assets/images/origin.jpg" alt="Origin Aluminium" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Origin</h3>
+            <p class="product-card__tagline">Innovative aluminium solutions for modern living.</p>
+            <a href="origin.html" class="product-card__link">EXPLORE &rarr;</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-card__image">
+            <img src="assets/images/quartz.jpg" alt="Quartz Windows" />
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Quartz</h3>
+            <p class="product-card__tagline">Precision-engineered for energy efficiency and lasting beauty.</p>
+            <a href="quartz.html" class="product-card__link">EXPLORE &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED PROJECTS ===== -->
+  <section class="section" id="projects" style="background: var(--bg-white);">
+    <div class="container">
+      <div class="text-center">
+        <h2>Featured Projects</h2>
+        <p class="subtitle">A selection of recent installations across the Four Corners region.</p>
+      </div>
+      <div class="projects-grid fade-in">
+
+        <div class="project-card">
+          <img src="assets/images/project-1.jpg" alt="Modern Residence, Durango CO" />
+          <div class="project-card__overlay">
+            <h3 class="project-card__name">Modern Residence</h3>
+            <p class="project-card__location">Durango, CO</p>
+            <a href="contact.html" class="project-card__link">VIEW PROJECT &rarr;</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="assets/images/project-2.jpg" alt="Mountain Estate, Telluride CO" />
+          <div class="project-card__overlay">
+            <h3 class="project-card__name">Mountain Estate</h3>
+            <p class="project-card__location">Telluride, CO</p>
+            <a href="contact.html" class="project-card__link">VIEW PROJECT &rarr;</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <img src="assets/images/project-3.jpg" alt="Desert Contemporary, Farmington NM" />
+          <div class="project-card__overlay">
+            <h3 class="project-card__name">Desert Contemporary</h3>
+            <p class="project-card__location">Farmington, NM</p>
+            <a href="contact.html" class="project-card__link">VIEW PROJECT &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY FOUR CORNERS ===== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="text-center">
+        <h2>Why Four Corners</h2>
+        <p class="subtitle">More than a supplier — a full-service architectural partner dedicated to your vision.</p>
+      </div>
+      <div class="values-grid fade-in">
+
+        <div class="value-item">
+          <h4 class="value-item__title">Expertise</h4>
+          <p class="value-item__text">Decades of combined industry experience means we can guide you through every specification, code requirement, and aesthetic decision with confidence.</p>
+        </div>
+
+        <div class="value-item">
+          <h4 class="value-item__title">Quality Craftsmanship</h4>
+          <p class="value-item__text">Every product we represent is held to an exacting standard. From raw material to finished installation, quality is never a compromise.</p>
+        </div>
+
+        <div class="value-item">
+          <h4 class="value-item__title">Full-Service Support</h4>
+          <p class="value-item__text">We handle design consultation, product selection, order management, and installation coordination — so you can focus on the project itself.</p>
+        </div>
+
+        <div class="value-item">
+          <h4 class="value-item__title">Trusted Partnership</h4>
+          <p class="value-item__text">Our relationships are built on transparency and accountability. We stand behind every product and every promise we make to our clients.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BAND ===== -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>Ready to start your project?</h2>
+      <p>Let's talk about your vision. Our team is here to help you select the perfect products and bring your design to life.</p>
+      <a href="contact.html" class="btn btn-light">REQUEST CONSULTATION</a>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div>
+          <div class="footer__logo">FOUR CORNERS</div>
+          <p class="footer__text">Premium architectural windows and doors for the Four Corners region. Serving Colorado, New Mexico, Utah, and Arizona.</p>
+        </div>
+
+        <div>
+          <div class="footer__heading">Navigate</div>
+          <a href="#about" class="footer__link">About</a>
+          <a href="#products" class="footer__link">Products</a>
+          <a href="#projects" class="footer__link">Projects</a>
+          <a href="contact.html" class="footer__link">Contact</a>
+        </div>
+
+        <div>
+          <div class="footer__heading">Products</div>
+          <a href="kolbe.html" class="footer__link">Kolbe</a>
+          <a href="lepage.html" class="footer__link">Lepage</a>
+          <a href="origin.html" class="footer__link">Origin</a>
+          <a href="quartz.html" class="footer__link">Quartz</a>
+        </div>
+
+        <div>
+          <div class="footer__heading">Contact</div>
+          <p class="footer__text">(970) 555-0140</p>
+          <p class="footer__text">info@fourcornersarch.com</p>
+          <p class="footer__text">1234 Mesa Verde Drive<br />Durango, CO 81301</p>
+        </div>
+
+      </div>
+      <div class="footer__bottom">
+        &copy; 2026 Four Corners Architectural. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
