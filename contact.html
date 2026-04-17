@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Four Corners Architectural</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header header--solid">
+    <a href="index.html" class="header__logo">FOUR CORNERS</a>
+    <nav class="header__nav">
+      <a href="index.html#about" class="header__link">About</a>
+      <div class="header__dropdown">
+        <a href="index.html#products" class="header__link">Products</a>
+        <div class="header__dropdown-menu">
+          <a href="kolbe.html" class="header__dropdown-item">Kolbe</a>
+          <a href="lepage.html" class="header__dropdown-item">Lepage</a>
+          <a href="origin.html" class="header__dropdown-item">Origin</a>
+          <a href="quartz.html" class="header__dropdown-item">Quartz</a>
+        </div>
+      </div>
+      <a href="index.html#projects" class="header__link">Projects</a>
+      <a href="contact.html" class="header__link">Contact</a>
+    </nav>
+    <button class="header__hamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- ===== MOBILE NAV ===== -->
+  <nav class="mobile-nav">
+    <button class="mobile-nav__close" aria-label="Close menu">&times;</button>
+    <a href="index.html#about" class="mobile-nav__link">About</a>
+    <a href="index.html#products" class="mobile-nav__link">Products</a>
+    <a href="kolbe.html" class="mobile-nav__link">Kolbe</a>
+    <a href="lepage.html" class="mobile-nav__link">Lepage</a>
+    <a href="origin.html" class="mobile-nav__link">Origin</a>
+    <a href="quartz.html" class="mobile-nav__link">Quartz</a>
+    <a href="index.html#projects" class="mobile-nav__link">Projects</a>
+    <a href="contact.html" class="mobile-nav__link">Contact</a>
+  </nav>
+
+  <!-- ===== BRAND HERO ===== -->
+  <section class="brand-hero" style="background-image: url('assets/images/contact-hero.jpg'); height: 40vh;">
+    <div class="brand-hero__overlay"></div>
+    <div class="brand-hero__content">
+      <h1 class="brand-hero__title">Get In Touch</h1>
+      <p class="brand-hero__tagline">We'd love to hear about your project</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT GRID ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- LEFT: FORM -->
+        <div>
+          <h2>Send Us a Message</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 32px;">Fill out the form below and a member of our team will be in touch within one business day.</p>
+
+          <form class="contact-form" novalidate>
+
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(970) 555-0000" />
+            </div>
+
+            <div class="form-group">
+              <label for="project-type">Project Type</label>
+              <select id="project-type" name="project-type">
+                <option value="" disabled selected>Select a project type</option>
+                <option value="new-construction">New Construction</option>
+                <option value="remodel">Remodel / Renovation</option>
+                <option value="addition">Addition</option>
+                <option value="commercial">Commercial</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your project — location, scope, timeline, and which products you're interested in." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">SEND MESSAGE</button>
+
+          </form>
+        </div>
+
+        <!-- RIGHT: CONTACT INFO + MAP -->
+        <div>
+          <h2>Our Information</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 32px;">We're based in Durango, Colorado and serve the broader Four Corners region — including southwest Colorado, northwest New Mexico, southeast Utah, and northeast Arizona.</p>
+
+          <div class="contact-info__item">
+            <div class="contact-info__label">Phone</div>
+            <div class="contact-info__value"><a href="tel:+19705550140">(970) 555-0140</a></div>
+          </div>
+
+          <div class="contact-info__item">
+            <div class="contact-info__label">Email</div>
+            <div class="contact-info__value"><a href="mailto:info@fourcornersarch.com">info@fourcornersarch.com</a></div>
+          </div>
+
+          <div class="contact-info__item">
+            <div class="contact-info__label">Address</div>
+            <div class="contact-info__value">1234 Mesa Verde Drive<br />Durango, CO 81301</div>
+          </div>
+
+          <div class="contact-info__item">
+            <div class="contact-info__label">Showroom Hours</div>
+            <div class="contact-info__value">
+              Monday – Friday: 8:00 am – 5:00 pm<br />
+              Saturday: 9:00 am – 2:00 pm<br />
+              Sunday: Closed
+            </div>
+          </div>
+
+          <!-- Map Placeholder -->
+          <div style="margin-top: 32px; background: var(--border); height: 280px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 14px; letter-spacing: 1px; text-transform: uppercase;">
+            Map Coming Soon
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div>
+          <div class="footer__logo">FOUR CORNERS</div>
+          <p class="footer__text">Premium architectural windows and doors for the Four Corners region. Serving Colorado, New Mexico, Utah, and Arizona.</p>
+        </div>
+
+        <div>
+          <div class="footer__heading">Navigate</div>
+          <a href="index.html#about" class="footer__link">About</a>
+          <a href="index.html#products" class="footer__link">Products</a>
+          <a href="index.html#projects" class="footer__link">Projects</a>
+          <a href="contact.html" class="footer__link">Contact</a>
+        </div>
+
+        <div>
+          <div class="footer__heading">Products</div>
+          <a href="kolbe.html" class="footer__link">Kolbe</a>
+          <a href="lepage.html" class="footer__link">Lepage</a>
+          <a href="origin.html" class="footer__link">Origin</a>
+          <a href="quartz.html" class="footer__link">Quartz</a>
+        </div>
+
+        <div>
+          <div class="footer__heading">Contact</div>
+          <p class="footer__text">(970) 555-0140</p>
+          <p class="footer__text">info@fourcornersarch.com</p>
+          <p class="footer__text">1234 Mesa Verde Drive<br />Durango, CO 81301</p>
+        </div>
+
+      </div>
+      <div class="footer__bottom">
+        &copy; 2026 Four Corners Architectural. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
