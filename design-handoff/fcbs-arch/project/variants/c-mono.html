@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Four Corners Architectural — Monochrome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f6f5f2;
+    --bg-2:#eceae4;
+    --paper:#ffffff;
+    --ink:#111110;
+    --ink-2:#3a3936;
+    --muted:#8a8780;
+    --line:#d8d5cc;
+    --line-2:#1a1a18;
+    --accent:#111110; /* black-only, near black */
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;font-weight:400;font-size:15px;line-height:1.55;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'JetBrains Mono',monospace;font-weight:500}
+  .serif{font-family:'Instrument Serif',serif;font-weight:400}
+
+  h1,h2,h3,h4{font-family:'Instrument Serif',serif;font-weight:400;line-height:1;letter-spacing:-0.015em}
+  h1{font-size:clamp(68px,12vw,200px)}
+  h2{font-size:clamp(46px,7vw,104px)}
+  h3{font-size:40px}
+  p{text-wrap:pretty}
+
+  .container{max-width:1440px;margin:0 auto;padding:0 40px}
+  .mono-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0;text-transform:uppercase;font-weight:500;color:var(--muted)}
+  .mono-label strong{color:var(--ink);font-weight:600}
+
+  /* Grid rail (decorative column lines) */
+  .rail{position:fixed;top:0;bottom:0;width:1px;background:var(--line);z-index:5;pointer-events:none}
+  .rail--l{left:40px}
+  .rail--r{right:40px}
+  @media(max-width:1024px){.rail{display:none}}
+
+  /* Header */
+  .header{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;transition:all .4s;background:rgba(246,245,242,0);border-bottom:1px solid transparent}
+  .header--solid{background:rgba(246,245,242,.95);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+  .header__logo{font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;letter-spacing:-0.01em;color:#fff;transition:color .4s}
+  .header--solid .header__logo{color:var(--ink)}
+  .header__nav{display:flex;gap:36px;justify-self:center}
+  .header__link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:500;color:rgba(255,255,255,.9);transition:color .4s;position:relative}
+  .header--solid .header__link{color:var(--ink)}
+  .header__link:hover{color:var(--muted)}
+  .header__link .num{font-size:9px;opacity:.5;margin-right:6px}
+  .header__meta{justify-self:end;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.8);text-align:right;line-height:1.6;transition:color .4s}
+  .header--solid .header__meta{color:var(--muted)}
+
+  /* Hero — editorial wide, type-led */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;padding:120px 40px 40px;color:#fff;overflow:hidden;background:#0a0a08}
+  .hero__media{position:absolute;inset:0;z-index:0}
+  .hero__media img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3) contrast(1.05) brightness(.9)}
+  .hero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,8,.5) 0%,rgba(10,10,8,.15) 40%,rgba(10,10,8,.85) 100%)}
+  .hero__grid{position:relative;z-index:2;flex:1;display:grid;grid-template-rows:auto 1fr auto;padding-top:60px}
+  .hero__tagline{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.7);display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.2)}
+  .hero__tagline span strong{display:block;color:#fff;font-weight:600;margin-bottom:6px}
+  .hero__center{display:flex;align-items:center;padding:80px 0}
+  .hero__title{font-size:clamp(72px,14vw,240px);line-height:.9;font-weight:400;letter-spacing:-0.035em;color:#fff}
+  .hero__title em{font-style:italic}
+  .hero__bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;padding-top:40px;border-top:1px solid rgba(255,255,255,.2);align-items:end}
+  .hero__lede{font-family:'Instrument Serif',serif;font-size:24px;line-height:1.3;font-style:italic;max-width:500px;color:rgba(255,255,255,.95)}
+  .hero__actions{display:flex;flex-direction:column;gap:12px}
+  .hero__cta{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#fff;padding:16px 0;border-top:1px solid rgba(255,255,255,.3);display:flex;justify-content:space-between;align-items:center;transition:border-color .3s}
+  .hero__cta:hover{border-color:#fff}
+  .hero__cta:last-child{border-bottom:1px solid rgba(255,255,255,.3)}
+  .hero__coords{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:rgba(255,255,255,.6);text-align:right;line-height:1.8}
+  .hero__coords strong{color:#fff;font-weight:600;display:block}
+
+  /* Manifesto band */
+  .manifesto{padding:140px 0 140px;background:var(--bg)}
+  .manifesto__grid{display:grid;grid-template-columns:1fr 3fr;gap:80px;align-items:start;padding-bottom:80px;border-bottom:1px solid var(--line)}
+  .manifesto__label{padding-top:16px}
+  .manifesto__text{font-family:'Instrument Serif',serif;font-size:clamp(36px,5.2vw,72px);line-height:1.08;letter-spacing:-0.02em;font-weight:400}
+  .manifesto__text em{font-style:italic}
+  .manifesto__text span{color:var(--muted)}
+
+  /* Products — index table */
+  .products{padding:0 0 0;background:var(--bg)}
+  .products__head{display:grid;grid-template-columns:1fr 3fr;gap:80px;padding:80px 0 60px}
+  .products__head h2{font-size:clamp(40px,6vw,88px)}
+  .products__head p{color:var(--muted);max-width:480px;font-size:15px;line-height:1.7;margin-top:24px}
+  .products__table{border-top:1px solid var(--line-2)}
+  .product-row{display:grid;grid-template-columns:60px 1fr 1fr 280px 160px;gap:40px;align-items:center;padding:32px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding .3s,background .3s;position:relative}
+  .product-row:hover{padding-left:16px}
+  .product-row__num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--muted)}
+  .product-row__name{font-family:'Instrument Serif',serif;font-size:56px;line-height:1;font-weight:400;letter-spacing:-0.02em}
+  .product-row__meta{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;color:var(--muted);line-height:1.8}
+  .product-row__meta strong{color:var(--ink);font-weight:600;display:block;margin-bottom:2px}
+  .product-row__desc{font-size:14px;line-height:1.65;color:var(--ink-2)}
+  .product-row__cta{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:500;justify-self:end;display:flex;gap:8px;align-items:center;transition:gap .3s}
+  .product-row:hover .product-row__cta{gap:16px}
+  .product-row__thumb{position:absolute;top:50%;left:60%;transform:translate(-50%,-50%) scale(.95);width:160px;height:200px;opacity:0;transition:opacity .4s,transform .5s;pointer-events:none;z-index:2;box-shadow:0 20px 60px rgba(0,0,0,.2);filter:grayscale(.4)}
+  .product-row__thumb img{width:100%;height:100%;object-fit:cover}
+  .product-row:hover .product-row__thumb{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+  /* Feature duplex */
+  .feature{padding:160px 0;background:var(--paper)}
+  .feature__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:80px;padding-bottom:24px;border-bottom:1px solid var(--line-2)}
+  .feature__head h2{font-size:clamp(40px,5.5vw,80px)}
+  .feature__grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:stretch}
+  .feature__img-wrap{position:relative}
+  .feature__img{aspect-ratio:4/5;overflow:hidden;position:relative}
+  .feature__img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.5) contrast(1.05)}
+  .feature__img-wrap .mono-label{position:absolute;bottom:-32px;left:0;right:0;display:flex;justify-content:space-between}
+  .feature__body{padding:20px 0;display:flex;flex-direction:column}
+  .feature__index{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+  .feature__title{font-size:clamp(44px,5.5vw,80px);line-height:.98;font-weight:400;letter-spacing:-0.025em;margin-bottom:24px}
+  .feature__title em{font-style:italic}
+  .feature__loc{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--ink-2);margin-bottom:40px}
+  .feature__text{font-size:16px;line-height:1.8;color:var(--ink-2);max-width:500px;margin-bottom:auto}
+  .feature__specs{display:grid;grid-template-columns:1fr 1fr;gap:24px 48px;margin:48px 0 32px;padding-top:32px;border-top:1px solid var(--line)}
+  .spec__label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .spec__value{font-family:'Instrument Serif',serif;font-size:22px;font-weight:400}
+  .feature__link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line-2);padding-top:20px;transition:color .3s}
+  .feature__link:hover{color:var(--muted)}
+
+  /* Projects — archive table */
+  .projects{padding:160px 0;background:var(--bg-2)}
+  .projects__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;padding-bottom:20px;border-bottom:1px solid var(--line-2)}
+  .projects__count{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+  .projects__count strong{color:var(--ink);font-family:'Instrument Serif',serif;font-size:28px;font-weight:400;vertical-align:middle;margin-right:8px}
+  .projects__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 24px}
+  .proj{cursor:pointer;position:relative}
+  .proj__img{aspect-ratio:3/4;overflow:hidden;margin-bottom:20px;background:var(--ink)}
+  .proj__img img{width:100%;height:100%;object-fit:cover;transition:transform 1s;filter:grayscale(.5)}
+  .proj:hover .proj__img img{transform:scale(1.04);filter:grayscale(0)}
+  .proj__num{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+  .proj__name{font-family:'Instrument Serif',serif;font-size:26px;line-height:1.1;font-weight:400;letter-spacing:-0.01em;margin-bottom:6px}
+  .proj__loc{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+  .proj__meta{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-top:6px}
+
+  /* Values — specimen */
+  .values{padding:160px 0;background:var(--ink);color:var(--bg)}
+  .values__head{display:grid;grid-template-columns:1fr 2fr;gap:80px;margin-bottom:80px;align-items:end;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.15)}
+  .values__head .mono-label{color:rgba(255,255,255,.6)}
+  .values__head .mono-label strong{color:#fff}
+  .values__head h2{color:#fff}
+  .values__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px}
+  .val{border-top:1px solid rgba(255,255,255,.2);padding-top:32px}
+  .val__num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:40px}
+  .val__title{font-family:'Instrument Serif',serif;font-size:32px;line-height:1;font-weight:400;letter-spacing:-0.01em;margin-bottom:20px;color:#fff}
+  .val__text{color:rgba(246,245,242,.6);line-height:1.75;font-size:14px}
+
+  /* Stats */
+  .stats{padding:80px 0;background:var(--bg);border-bottom:1px solid var(--line)}
+  .stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .stat{padding:32px 40px 32px 0;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat__num{font-family:'Instrument Serif',serif;font-size:72px;line-height:1;font-weight:400;letter-spacing:-0.03em;margin-bottom:12px}
+  .stat__label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+
+  /* CTA */
+  .cta{padding:180px 0;background:var(--bg);text-align:center;border-top:1px solid var(--line-2)}
+  .cta__eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:40px;display:block}
+  .cta__title{font-size:clamp(64px,11vw,180px);line-height:.9;letter-spacing:-0.035em;font-weight:400;margin-bottom:60px}
+  .cta__title em{font-style:italic}
+  .cta__links{display:flex;justify-content:center;gap:64px;font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;font-weight:500;flex-wrap:wrap}
+  .cta__links a{padding:16px 0;border-bottom:1px solid var(--ink);transition:color .3s,border-color .3s}
+  .cta__links a:hover{color:var(--muted);border-color:var(--muted)}
+
+  /* Footer */
+  .footer{padding:60px 0 32px;background:var(--ink);color:rgba(246,245,242,.8);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+  .footer__top{display:grid;grid-template-columns:repeat(5,1fr);gap:40px;padding-bottom:80px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:32px}
+  .footer__heading{color:rgba(255,255,255,.45);margin-bottom:20px;font-weight:500}
+  .footer__link{display:block;color:#fff;margin-bottom:10px;transition:color .3s;text-transform:none;letter-spacing:.3px;font-family:'Instrument Serif',serif;font-size:20px;font-weight:400}
+  .footer__link:hover{color:var(--muted)}
+  .footer__brand{font-family:'Instrument Serif',serif;font-size:44px;line-height:1;font-weight:400;letter-spacing:-0.02em;text-transform:none;color:#fff;margin-bottom:16px}
+  .footer__bottom{display:flex;justify-content:space-between;color:rgba(255,255,255,.4)}
+
+  @media(max-width:1024px){
+    .header__nav,.header__meta{display:none}
+    .hero__tagline,.hero__bottom,.products__head,.feature__grid,.values__head,.values__grid,.manifesto__grid,.projects__grid,.footer__top,.stats__grid{grid-template-columns:1fr;gap:24px}
+    .stats__grid{gap:0}
+    .stat{border-right:none;border-bottom:1px solid var(--line);padding:24px 0}
+    .product-row{grid-template-columns:40px 1fr;gap:20px}
+    .product-row__meta,.product-row__desc,.product-row__cta{grid-column:2;justify-self:start}
+    .values__grid{grid-template-columns:1fr 1fr}
+    .projects__grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="rail rail--l"></div>
+<div class="rail rail--r"></div>
+
+<!-- Header -->
+<header class="header" id="header">
+  <a href="#" class="header__logo">Four Corners<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;margin-left:12px;text-transform:uppercase;vertical-align:middle;">/ Architectural</span></a>
+  <nav class="header__nav">
+    <a href="#intro" class="header__link"><span class="num">01</span>About</a>
+    <a href="#products" class="header__link"><span class="num">02</span>Products</a>
+    <a href="#projects" class="header__link"><span class="num">03</span>Projects</a>
+    <a href="#" class="header__link"><span class="num">04</span>Journal</a>
+    <a href="#cta" class="header__link"><span class="num">05</span>Contact</a>
+  </nav>
+  <div class="header__meta">
+    32°46′N / 79°55′W<br/>
+    <span style="font-weight:600">Charleston, SC</span>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__media">
+    <img src="https://images.unsplash.com/photo-1613977257365-aaae5a9817ff?w=2200&q=85" alt="" />
+  </div>
+  <div class="hero__grid">
+    <div class="hero__tagline">
+      <span><strong>N° 01 — Philosophy</strong>A considered approach to the specification and installation of premium fenestration.</span>
+      <span style="text-align:center"><strong>Est. 2002</strong>Architectural Division of Four Corners Building Supply</span>
+      <span style="text-align:right"><strong>Charleston, SC</strong>Serving the Carolina Lowcountry coast</span>
+    </div>
+    <div class="hero__center">
+      <h1 class="hero__title">Frames<br/>for the <em>way</em><br/>you live.</h1>
+    </div>
+    <div class="hero__bottom">
+      <p class="hero__lede">Four premium houses. One trusted partner for Lowcountry homes — from Charleston single-houses to marsh-front moderns on Kiawah.</p>
+      <div class="hero__actions">
+        <a href="#products" class="hero__cta"><span>See the Collection</span><span>→</span></a>
+        <a href="#cta" class="hero__cta"><span>Request Consultation</span><span>→</span></a>
+      </div>
+      <div class="hero__coords">
+        <strong>Issue N° 007</strong>
+        Spring / MMXXVI<br/>
+        Kolbe · Lepage<br/>
+        Origin · Quartz
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Manifesto -->
+<section class="manifesto" id="intro">
+  <div class="container">
+    <div class="manifesto__grid">
+      <div class="manifesto__label"><span class="mono-label"><strong>§ 01</strong> — Philosophy</span></div>
+      <div>
+        <p class="manifesto__text">A window is the <em>hinge</em> between a building and the world it occupies. <span>Lowcountry light, salt air, and hurricane-grade engineering deserve the same measure of craft — from the first consultation to the final reveal.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <div class="stats__grid">
+      <div class="stat"><div class="stat__num">1,243</div><div class="stat__label">Projects Delivered</div></div>
+      <div class="stat"><div class="stat__num">04</div><div class="stat__label">Premium Houses</div></div>
+      <div class="stat"><div class="stat__num">78</div><div class="stat__label">Yrs Combined</div></div>
+      <div class="stat"><div class="stat__num">100%</div><div class="stat__label">Coast-Rated</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="products__head">
+      <div class="mono-label"><strong>§ 02</strong> — The Collection</div>
+      <div>
+        <h2>Four houses.<br/>One standard.</h2>
+        <p>Each chosen for a specific conviction. Hover to preview.</p>
+      </div>
+    </div>
+    <div class="products__table">
+      <a href="#" class="product-row">
+        <div class="product-row__num">01</div>
+        <div class="product-row__name">Kolbe</div>
+        <div class="product-row__meta"><strong>Wausau, WI</strong>Est. 1946<br/>Wood / Clad</div>
+        <div class="product-row__desc">Heirloom wood windows and doors, built for homes where every detail answers to a drawing.</div>
+        <div class="product-row__cta">Read<span>→</span></div>
+        <div class="product-row__thumb"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=80" alt="" /></div>
+      </a>
+      <a href="#" class="product-row">
+        <div class="product-row__num">02</div>
+        <div class="product-row__name">Lepage</div>
+        <div class="product-row__meta"><strong>Boucherville, QC</strong>Est. 1957<br/>Tilt-turn / Wood</div>
+        <div class="product-row__desc">European engineering with North American craftsmanship — slim sightlines, silent operation.</div>
+        <div class="product-row__cta">Read<span>→</span></div>
+        <div class="product-row__thumb"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80" alt="" /></div>
+      </a>
+      <a href="#" class="product-row">
+        <div class="product-row__num">03</div>
+        <div class="product-row__name">Origin</div>
+        <div class="product-row__meta"><strong>Gloucestershire, UK</strong>Est. 2002<br/>Aluminium</div>
+        <div class="product-row__desc">British-designed aluminium systems for modern living — expansive glass, quiet strength.</div>
+        <div class="product-row__cta">Read<span>→</span></div>
+        <div class="product-row__thumb"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&q=80" alt="" /></div>
+      </a>
+      <a href="#" class="product-row">
+        <div class="product-row__num">04</div>
+        <div class="product-row__name">Quartz</div>
+        <div class="product-row__meta"><strong>Saint-Malo, QC</strong>Est. 1974<br/>Wood / Clad</div>
+        <div class="product-row__desc">Precision-engineered for coastal exposure, energy efficiency, and generational service.</div>
+        <div class="product-row__cta">Read<span>→</span></div>
+        <div class="product-row__thumb"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=80" alt="" /></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Feature -->
+<section class="feature">
+  <div class="container">
+    <div class="feature__head">
+      <div><span class="mono-label"><strong>§ 03</strong> — Case Study N° 001</span><h2 style="margin-top:20px">In the field.</h2></div>
+      <div class="mono-label" style="text-align:right">01 / 12 Featured<br/><strong>View Archive →</strong></div>
+    </div>
+    <div class="feature__grid">
+      <div class="feature__img-wrap">
+        <div class="feature__img"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&q=90" alt="" /></div>
+        <div class="mono-label"><span>N° 001 / Residential</span><span>MMXXV</span></div>
+      </div>
+      <div class="feature__body">
+        <div class="feature__index">Photography: J. Reynolds · Documented Oct. 2025</div>
+        <h3 class="feature__title">The Marsh Light House</h3>
+        <div class="feature__loc">— Kiawah Island, South Carolina</div>
+        <p class="feature__text">A modern marsh-front residence clad in cedar and glass, where the brief was simple: make the architecture disappear into the view. Thirty-two Origin OS-44 sliders, custom Kolbe fixed panels, and a full tilt-turn envelope from Lepage.</p>
+        <div class="feature__specs">
+          <div><div class="spec__label">Architect</div><div class="spec__value">Studio W.A.</div></div>
+          <div><div class="spec__label">Builder</div><div class="spec__value">Phillips &amp; Co.</div></div>
+          <div><div class="spec__label">Systems</div><div class="spec__value">Kolbe · Origin · Lepage</div></div>
+          <div><div class="spec__label">Completion</div><div class="spec__value">2025</div></div>
+        </div>
+        <a href="#" class="feature__link"><span>Read the Case Study</span><span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="projects__head">
+      <div><span class="mono-label"><strong>§ 04</strong> — Selected Works</span><h2 style="margin-top:20px">Archive.</h2></div>
+      <div class="projects__count"><strong>12</strong>/ projects · 2023—2026 · Charleston · Kiawah · Sullivan's · Folly</div>
+    </div>
+    <div class="projects__grid">
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 002 / Residential</div>
+        <div class="proj__name">Rutledge Residence</div>
+        <div class="proj__loc">Charleston, SC</div>
+        <div class="proj__meta"><span>2025</span><span>Studio W.A.</span></div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 003 / Residential</div>
+        <div class="proj__name">Sand Dollar Cottage</div>
+        <div class="proj__loc">Sullivan's Island, SC</div>
+        <div class="proj__meta"><span>2025</span><span>Beam &amp; Post</span></div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1613553474179-e1eda3ea5734?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 004 / Residential</div>
+        <div class="proj__name">Folly Cross House</div>
+        <div class="proj__loc">Folly Beach, SC</div>
+        <div class="proj__meta"><span>2024</span><span>M. Rhodes</span></div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 005 / Residential</div>
+        <div class="proj__name">Oyster Point</div>
+        <div class="proj__loc">Kiawah Island, SC</div>
+        <div class="proj__meta"><span>2024</span><span>North + Shore</span></div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 006 / Residential</div>
+        <div class="proj__name">Tradd Street House</div>
+        <div class="proj__loc">Charleston, SC</div>
+        <div class="proj__meta"><span>2024</span><span>Halsey Studio</span></div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 007 / Residential</div>
+        <div class="proj__name">Beach Walk Bungalow</div>
+        <div class="proj__loc">Folly Beach, SC</div>
+        <div class="proj__meta"><span>2023</span><span>Beam &amp; Post</span></div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1600047509847-dffe69a7ee1a?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 008 / Residential</div>
+        <div class="proj__name">Magnolia Court</div>
+        <div class="proj__loc">Charleston, SC</div>
+        <div class="proj__meta"><span>2023</span><span>Studio W.A.</span></div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=800&q=85" alt="" /></div>
+        <div class="proj__num">N° 009 / Commercial</div>
+        <div class="proj__name">King Street Atelier</div>
+        <div class="proj__loc">Charleston, SC</div>
+        <div class="proj__meta"><span>2023</span><span>M. Rhodes</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="values">
+  <div class="container">
+    <div class="values__head">
+      <div class="mono-label"><strong style="color:#fff">§ 05</strong> — Principles</div>
+      <h2>The partner <em style="font-style:italic">behind</em><br/>the glass.</h2>
+    </div>
+    <div class="values__grid">
+      <div class="val">
+        <div class="val__num">N° 01 / Expertise</div>
+        <h3 class="val__title">Specification expertise</h3>
+        <p class="val__text">Decades on the Carolina coast. We know the code, the loads, and the subtle decisions that separate a beautiful window from one that survives three hurricanes.</p>
+      </div>
+      <div class="val">
+        <div class="val__num">N° 02 / Craft</div>
+        <h3 class="val__title">Craftsmanship, curated</h3>
+        <p class="val__text">Every line we carry is held to an exacting standard. From raw timber to finished reveal, quality is never a line-item to value-engineer away.</p>
+      </div>
+      <div class="val">
+        <div class="val__num">N° 03 / Service</div>
+        <h3 class="val__title">Full-service support</h3>
+        <p class="val__text">Design consultation, take-offs, order management, logistics, installation coordination — a single point of accountability from drawing to delivery.</p>
+      </div>
+      <div class="val">
+        <div class="val__num">N° 04 / Trust</div>
+        <h3 class="val__title">Trusted on the coast</h3>
+        <p class="val__text">Architects, GCs, and homeowners return project after project. Our relationships are built on transparency, follow-through, and showing up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="container">
+    <span class="cta__eyebrow">§ 06 — Begin</span>
+    <h2 class="cta__title">Let's <em>talk</em> about<br/>what you're building.</h2>
+    <div class="cta__links">
+      <a href="#">Request Consultation →</a>
+      <a href="tel:+18439702146">(843) 970-2146 →</a>
+      <a href="mailto:info@buildfcbs.com">info@buildfcbs.com →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <div class="footer__brand">Four Corners</div>
+        <div class="footer__heading">Architectural · Est. 2002</div>
+        <p style="color:rgba(255,255,255,.6);margin-top:16px;text-transform:none;font-family:'Instrument Serif',serif;font-size:18px;font-style:italic;letter-spacing:-.01em;line-height:1.4;">"A window is the hinge between a building and the world."</p>
+      </div>
+      <div>
+        <div class="footer__heading">Navigate</div>
+        <a href="#" class="footer__link">About</a>
+        <a href="#products" class="footer__link">Products</a>
+        <a href="#projects" class="footer__link">Projects</a>
+        <a href="#" class="footer__link">Journal</a>
+      </div>
+      <div>
+        <div class="footer__heading">Collection</div>
+        <a href="#" class="footer__link">Kolbe</a>
+        <a href="#" class="footer__link">Lepage</a>
+        <a href="#" class="footer__link">Origin</a>
+        <a href="#" class="footer__link">Quartz</a>
+      </div>
+      <div>
+        <div class="footer__heading">Studio</div>
+        <a href="tel:+18439702146" class="footer__link" style="font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;">(843) 970-2146</a>
+        <a href="mailto:info@buildfcbs.com" class="footer__link" style="font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:none;">info@buildfcbs.com</a>
+        <p style="color:rgba(255,255,255,.6);margin-top:8px;text-transform:none;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.5px">3870 Leeds Ave #101<br/>N. Charleston, SC 29405</p>
+      </div>
+      <div>
+        <div class="footer__heading">Social</div>
+        <a href="#" class="footer__link" style="font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;">Instagram →</a>
+        <a href="#" class="footer__link" style="font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;">Facebook →</a>
+        <a href="#" class="footer__link" style="font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;">LinkedIn →</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© MMXXVI · Four Corners Architectural</div>
+      <div>Charleston · Kiawah · Sullivan's · Folly</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const h=document.getElementById('header');
+  window.addEventListener('scroll',()=>{
+    h.classList.toggle('header--solid',window.scrollY>80);
+  });
+</script>
+</body>
+</html>

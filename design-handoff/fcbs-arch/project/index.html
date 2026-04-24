@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en"><head>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Four Corners Architectural — Design Explorations</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Instrument+Serif&amp;display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:'Inter',sans-serif;background:#0e0d0b;color:#ede8dc;overflow:hidden}
+
+  /* Top bar */
+  .bar{position:fixed;top:0;left:0;right:0;z-index:1000;height:56px;background:rgba(14,13,11,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(237,232,220,.12);display:flex;align-items:center;padding:0 20px;gap:28px}
+  .bar__brand{font-family:'Instrument Serif',serif;font-size:20px;letter-spacing:-.01em;font-style:italic;white-space:nowrap}
+  .bar__brand span{font-family:'Inter',sans-serif;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;font-style:normal;margin-left:8px;color:#c8a26a;font-weight:600;vertical-align:middle}
+  .bar__tabs{display:flex;gap:4px;margin-left:auto;margin-right:auto;background:rgba(237,232,220,.05);padding:4px;border-radius:999px;border:1px solid rgba(237,232,220,.08)}
+  .bar__tab{padding:8px 16px;border-radius:999px;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#c5beae;cursor:pointer;border:none;background:transparent;transition:all .25s;white-space:nowrap;display:flex;align-items:center;gap:8px}
+  .bar__tab:hover{color:#ede8dc}
+  .bar__tab.active{background:#ede8dc;color:#0e0d0b}
+  .bar__tab .num{font-family:'Instrument Serif',serif;font-size:13px;font-style:italic;opacity:.6}
+  .bar__tab.active .num{opacity:.8}
+  .bar__info{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#7c7567;font-weight:500;white-space:nowrap}
+  .bar__info strong{color:#c8a26a;font-weight:600}
+
+  /* Frame */
+  .frame{position:absolute;top:56px;left:0;right:0;bottom:0}
+  .frame iframe{width:100%;height:100%;border:0;display:block;background:#0e0d0b}
+
+  /* Description rail */
+  .rail{position:fixed;left:20px;bottom:20px;z-index:900;background:rgba(14,13,11,.9);backdrop-filter:blur(16px);border:1px solid rgba(237,232,220,.12);padding:18px 22px;max-width:380px;font-size:13px;line-height:1.55;color:#c5beae;transition:opacity .3s}
+  .rail__title{font-family:'Instrument Serif',serif;font-size:20px;color:#ede8dc;margin-bottom:6px;letter-spacing:-.01em}
+  .rail__title em{color:#c8a26a;font-style:italic}
+  .rail__meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#c8a26a;font-weight:600;margin-bottom:10px}
+  .rail__close{position:absolute;top:10px;right:12px;background:transparent;border:none;color:#7c7567;cursor:pointer;font-size:16px;padding:4px}
+  .rail__close:hover{color:#ede8dc}
+
+  .rail.collapsed{padding:10px 14px;max-width:120px;cursor:pointer}
+  .rail.collapsed .rail__title,.rail.collapsed .rail__body,.rail.collapsed .rail__close{display:none}
+  .rail.collapsed .rail__meta{margin-bottom:0;color:#c8a26a}
+
+  @media(max-width:760px){
+    .bar{gap:12px;padding:0 12px}
+    .bar__tab{padding:6px 10px;font-size:10px;letter-spacing:1px}
+    .bar__tab span:not(.num){display:none}
+    .bar__info,.bar__brand span{display:none}
+    .rail{display:none}
+  }
+</style>
+</head>
+<body data-cc-id="cc-1" style="cursor: crosshair; background-color: rgb(16, 16, 16);">
+
+<div class="bar">
+  <div class="bar__brand">Four Corners<span>FCBS · Arch</span></div>
+  <div class="bar__tabs" role="tablist">
+    <button class="bar__tab" data-v="a" data-title="Faithful" data-desc="Warm cream, Playfair Display + Montserrat, brown accent #9e785a. A polished, spec-matching direction with an editorial feel — large Playfair display type, refined product cards with roman numerals, Charleston coastal imagery, and a closing dark CTA band." data-meta="01 · Spec-matching cream + brown">
+      <span class="num">01</span><span>Faithful</span>
+    </button>
+    <button class="bar__tab" data-v="b" data-title="Editorial" data-desc="Cormorant Garamond + Inter, deeper warm tan + oxblood on a richer cream. A magazine-like editorial — oversized italics, section folios, a running marquee, column-set intro with drop cap, and a vertical index-style product list that previews on hover." data-meta="02 · Editorial / magazine">
+      <span class="num">02</span><span>Editorial</span>
+    </button>
+    <button class="bar__tab" data-v="c" data-title="Monochrome" data-desc="Instrument Serif + JetBrains Mono. Near-black only, architect's drawing-set language: §§ labels, N° numbering, grid rails, photography credits. Index-table products with hover thumbnails, desaturated imagery, a dense values specimen." data-meta="03 · Black-only, architect">
+      <span class="num">03</span><span>Monochrome</span>
+    </button>
+    <button class="bar__tab active" data-v="d" data-title="Obsidian" data-desc="Fraunces + Inter in obsidian black with a brass #c8a26a accent. Cinematic dark mode — gradient-lit hero, cinematic half-and-half feature spread, dark product cards whose taglines expand on hover, brass hairline details throughout." data-meta="04 · Dark mode, brass">
+      <span class="num">04</span><span>Obsidian</span>
+    </button>
+  </div>
+  <div class="bar__info" id="info"><strong>04</strong> · Obsidian · Dark mode, brass</div>
+</div>
+
+<div class="frame">
+  <iframe id="frame" src="variants/d-obsidian.html" title="variant"></iframe>
+</div>
+
+<div class="rail collapsed" id="rail">
+  <button class="rail__close" id="close">×</button>
+  <div class="rail__meta" id="rmeta">04 · Dark mode, brass</div>
+  <div class="rail__title" id="rtitle">Obsidian</div>
+  <div class="rail__body" id="rbody">Fraunces + Inter in obsidian black with a brass #c8a26a accent. Cinematic dark mode — gradient-lit hero, cinematic half-and-half feature spread, dark product cards whose taglines expand on hover, brass hairline details throughout.</div>
+</div>
+
+<script>
+  const frame=document.getElementById('frame');
+  const tabs=document.querySelectorAll('.bar__tab');
+  const info=document.getElementById('info');
+  const rtitle=document.getElementById('rtitle');
+  const rbody=document.getElementById('rbody');
+  const rmeta=document.getElementById('rmeta');
+  const rail=document.getElementById('rail');
+  const srcs={
+    a:'variants/a-faithful.html',
+    b:'variants/b-editorial.html',
+    c:'variants/c-mono.html',
+    d:'variants/d-obsidian.html'
+  };
+
+  function pick(v){
+    tabs.forEach(t=>t.classList.toggle('active',t.dataset.v===v));
+    const t=[...tabs].find(t=>t.dataset.v===v);
+    frame.src=srcs[v];
+    info.innerHTML='<strong>'+t.querySelector('.num').textContent+'</strong> · '+t.dataset.title+' · '+t.dataset.meta.split('·').slice(1).join('·').trim();
+    rtitle.innerHTML=t.dataset.title;
+    rbody.textContent=t.dataset.desc;
+    rmeta.textContent=t.dataset.meta;
+    try{localStorage.setItem('fc-variant',v)}catch(e){}
+  }
+
+  tabs.forEach(t=>t.addEventListener('click',()=>pick(t.dataset.v)));
+
+  document.getElementById('close').addEventListener('click',(e)=>{
+    e.stopPropagation();
+    rail.classList.add('collapsed');
+  });
+  rail.addEventListener('click',()=>{
+    if(rail.classList.contains('collapsed'))rail.classList.remove('collapsed');
+  });
+
+  // restore
+  try{
+    const saved=localStorage.getItem('fc-variant');
+    if(saved && srcs[saved]) pick(saved);
+  }catch(e){}
+
+  // arrow key navigation
+  window.addEventListener('keydown',e=>{
+    const keys=['a','b','c','d'];
+    const cur=[...tabs].findIndex(t=>t.classList.contains('active'));
+    if(e.key==='ArrowRight')pick(keys[(cur+1)%4]);
+    if(e.key==='ArrowLeft')pick(keys[(cur+3)%4]);
+  });
+</script>
+
+
+</body></html>

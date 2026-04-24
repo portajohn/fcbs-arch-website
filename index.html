@@ -1,252 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Four Corners Architectural | Elevated Design</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Four Corners Architectural — First Class Glass</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0e0d0b;
+    --bg-2:#0e0d0b;
+    --panel:#1a1814;
+    --ink:#ede8dc;
+    --ink-2:#c5beae;
+    --muted:#7c7567;
+    --line:#2a2722;
+    --line-2:#3a352c;
+    --brass:#c8a26a;
+    --brass-2:#d7b783;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-snap-type:y proximity;scroll-padding-top:72px}
+  .hero,.products,.projects,.values,.cta{scroll-snap-align:start}
+  body{font-family:'Inter',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  img,video{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:400;line-height:1.02;letter-spacing:-0.02em;font-variation-settings:"opsz" 144}
+  h1{font-size:clamp(60px,10vw,160px)}
+  h2{font-size:clamp(40px,6vw,88px)}
+  p{text-wrap:pretty}
+
+  .container{max-width:1400px;margin:0 auto;padding:0 40px}
+  .kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;color:var(--brass);display:inline-flex;align-items:center;gap:14px}
+  .kicker::before{content:"";width:32px;height:1px;background:var(--brass)}
+
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:16px 32px;font-family:'Inter',sans-serif;font-weight:500;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--brass);color:var(--brass);background:transparent}
+  .btn:hover{background:var(--brass);color:var(--bg)}
+  .btn--filled{background:var(--brass);color:var(--bg)}
+  .btn--filled:hover{background:var(--brass-2);border-color:var(--brass-2)}
+  .btn--ghost{border-color:rgba(237,232,220,.3);color:var(--ink)}
+  .btn--ghost:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+  /* Header */
+  .header{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;transition:all .4s;color:var(--ink)}
+  .header--solid{background:rgba(14,13,11,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .header__logo{display:inline-flex;align-items:center;gap:14px;font-family:'Fraunces',serif;font-size:22px;font-weight:400;letter-spacing:-0.01em;font-style:italic;color:var(--ink)}
+  .header__emblem{height:40px;width:auto;flex-shrink:0}
+  .header__logo-wordmark{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;gap:4px}
+  .header__logo-wordmark > span{font-family:'Fraunces',serif;font-size:11px;letter-spacing:0.22em;margin-left:0;font-weight:500;text-transform:uppercase;color:var(--brass);font-style:normal;padding-right:0.22em}
+  .header__nav{display:flex;gap:40px;justify-self:center;align-items:center}
+  .header__link{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;color:var(--ink);transition:color .3s}
+  .header__link:hover{color:var(--brass)}
+  .header__right{justify-self:end;display:flex;align-items:center;gap:24px}
+  .header__cta{padding:10px 22px;border:1px solid var(--brass);color:var(--brass);font-size:11px;letter-spacing:2px;font-weight:500;text-transform:uppercase;transition:all .3s}
+  .header__cta:hover{background:var(--brass);color:var(--bg)}
+  .header__hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .header__hamburger span{display:block;width:24px;height:2px;background:var(--ink);transition:.3s}
+
+  /* Mobile nav overlay */
+  .mobile-nav{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:40px}
+  .mobile-nav.open{display:flex}
+  .mobile-nav__close{position:absolute;top:24px;right:24px;background:none;border:none;font-size:28px;cursor:pointer;color:var(--ink)}
+  .mobile-nav__link{font-family:'Inter',sans-serif;font-weight:500;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);transition:color .3s}
+  .mobile-nav__link:hover{color:var(--brass)}
+  .mobile-nav__divider{width:40px;height:1px;background:var(--line-2);margin:4px 0}
+
+  /* Hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;padding:140px 40px 60px;overflow:hidden;color:var(--ink)}
+  .hero__media{position:absolute;inset:0;z-index:0}
+  .hero__media img,.hero__media video{width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.85)}
+  .hero__media::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(14,13,11,.95) 0%,rgba(14,13,11,.45) 45%,rgba(14,13,11,.7) 100%)}
+  .hero__content{position:relative;z-index:2;max-width:1400px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr auto;gap:60px;align-items:end}
+  .hero__main{max-width:1100px}
+  .hero__kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:500;color:var(--brass);margin-bottom:32px;display:flex;align-items:center;gap:16px}
+  .hero__kicker::before{content:"";width:48px;height:1px;background:var(--brass)}
+  .hero__title{font-size:clamp(44px,7vw,112px);line-height:.94;font-weight:300;letter-spacing:-0.035em;margin-bottom:36px;color:var(--ink)}
+  .hero__title em{font-style:italic;color:var(--brass);font-weight:400}
+  .hero__sub{font-size:19px;max-width:540px;margin-bottom:48px;color:var(--ink-2);line-height:1.6}
+  .hero__actions{display:flex;gap:16px;flex-wrap:wrap}
+  .hero__aside{display:flex;flex-direction:column;gap:24px;padding-left:48px;border-left:1px solid rgba(237,232,220,.15);min-width:280px}
+  .hero__aside-item{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);line-height:1.6}
+  .hero__aside-item strong{display:block;color:var(--brass);font-size:14px;margin-bottom:4px;font-weight:500;font-family:'Fraunces',serif;font-style:italic;letter-spacing:-0.01em;text-transform:none}
+
+  /* Products */
+  .products{padding:30px 0 40px;background:var(--bg-2);position:relative;overflow:hidden}
+  .products::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(200,162,106,.05),transparent 50%);pointer-events:none}
+  .products__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;gap:48px}
+  .products__head h2{max-width:720px;font-size:clamp(28px,3.5vw,48px)}
+  .products__head h2 em{font-style:italic;color:var(--brass)}
+  .products__head-right{color:var(--ink-2);line-height:1.7;max-width:360px;text-align:right;font-family:'Fraunces',serif;font-style:italic;font-size:20px}
+  .products__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .product-card{position:relative;overflow:hidden;cursor:pointer;background:var(--panel);aspect-ratio:3/2;transition:transform .5s}
+  .product-card:hover{transform:translateY(-8px)}
+  .product-card__img{position:absolute;inset:0;z-index:0}
+  .product-card__img img{width:100%;height:100%;object-fit:cover;filter:brightness(.75) saturate(.9);transition:transform 1s,filter .5s}
+  .product-card:hover .product-card__img img{transform:scale(1.08);filter:brightness(.85) saturate(1)}
+  .product-card__img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,13,11,.2) 0%,rgba(14,13,11,.3) 40%,rgba(14,13,11,.92) 100%)}
+  .product-card__body{position:absolute;left:28px;right:28px;bottom:28px;z-index:2;color:var(--ink)}
+  .product-card__num{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);font-weight:500;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .product-card__num::before{content:"";width:18px;height:1px;background:var(--brass)}
+  .product-card__name{font-family:'Fraunces',serif;font-size:32px;line-height:1.02;font-weight:400;letter-spacing:-0.02em;margin-bottom:10px}
+  .product-card__tagline{font-size:13px;line-height:1.6;color:var(--ink-2);margin-bottom:24px;max-height:0;opacity:0;overflow:hidden;transition:all .5s}
+  .product-card:hover .product-card__tagline{max-height:80px;opacity:1;margin-bottom:24px}
+  .product-card__cta{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);font-weight:600;display:flex;align-items:center;gap:8px;transition:gap .3s}
+  .product-card:hover .product-card__cta{gap:14px}
+
+  /* Projects */
+  .projects{padding:160px 0;background:var(--bg-2)}
+  .projects__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px}
+  .projects__head h2 em{font-style:italic;color:var(--brass)}
+  .projects__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .proj{grid-column:span 1;aspect-ratio:4/5;position:relative;overflow:hidden;cursor:pointer;background:var(--panel)}
+  .proj img{width:100%;height:100%;object-fit:cover;transition:transform 1s;filter:brightness(.85)}
+  .proj:hover img{transform:scale(1.05);filter:brightness(1)}
+  .proj__overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;background:linear-gradient(180deg,transparent 50%,rgba(14,13,11,.85));color:var(--ink)}
+  .proj__num{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);margin-bottom:12px;font-weight:500}
+  .proj__name{font-family:'Fraunces',serif;font-size:28px;line-height:1;font-weight:400;letter-spacing:-0.02em;margin-bottom:6px}
+  .proj__loc{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--ink-2)}
+
+  /* Values */
+  .values{padding:160px 0;background:var(--bg)}
+  .values__head{text-align:center;margin-bottom:100px}
+  .values__head h2{margin-top:24px;max-width:900px;margin-inline:auto}
+  .values__head h2 em{font-style:italic;color:var(--brass)}
+  .values__head .kicker{justify-content:center}
+  .values__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .val{padding:40px 32px;border:1px solid var(--line-2);background:var(--panel);transition:all .4s;position:relative;overflow:hidden}
+  .val::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--brass),transparent);transform:scaleX(0);transform-origin:left;transition:transform .5s}
+  .val:hover{border-color:var(--brass);background:rgba(200,162,106,.04)}
+  .val:hover::before{transform:scaleX(1)}
+  .val__num{font-family:'Fraunces',serif;font-size:14px;font-style:italic;color:var(--brass);margin-bottom:40px;letter-spacing:0}
+  .val__title{font-family:'Fraunces',serif;font-size:28px;line-height:1.1;font-weight:400;letter-spacing:-0.01em;margin-bottom:20px;color:var(--ink)}
+  .val__text{color:var(--ink-2);line-height:1.75;font-size:14px}
+
+  /* CTA */
+  .cta{padding:0;background:var(--bg);position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .cta__bg{position:absolute;inset:0;z-index:0}
+  .cta__bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) saturate(.8)}
+  .cta__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,13,11,.95),rgba(14,13,11,.7) 60%,rgba(14,13,11,.9))}
+  .cta__inner{position:relative;z-index:2;padding:40px;max-width:1100px;margin:0 auto;text-align:center}
+  .cta h2{color:var(--ink);margin-bottom:36px}
+  .cta h2 em{font-style:italic;color:var(--brass)}
+  .cta p{color:var(--ink-2);font-size:18px;line-height:1.7;margin-bottom:48px;max-width:600px;margin-inline:auto}
+  .cta__actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+  /* Footer */
+  .footer{padding:100px 0 40px;background:var(--bg);border-top:1px solid var(--line-2)}
+  .footer__top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:64px;padding-bottom:72px;border-bottom:1px solid var(--line-2)}
+  .footer__brand{font-family:'Fraunces',serif;font-size:44px;line-height:1;font-weight:400;letter-spacing:-0.02em;margin-bottom:12px;color:var(--ink)}
+  .footer__brand em{font-style:italic;color:var(--brass)}
+  .footer__tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--brass);font-weight:500;margin-bottom:32px}
+  .footer__text{color:var(--ink-2);line-height:1.75;max-width:340px;font-family:'Fraunces',serif;font-style:italic;font-size:18px}
+  .footer__heading{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--brass);font-weight:500;margin-bottom:20px}
+  .footer__link{display:block;color:var(--ink-2);font-size:14px;margin-bottom:10px;transition:color .3s}
+  .footer__link:hover{color:var(--brass)}
+  .footer__bottom{display:flex;justify-content:space-between;padding-top:32px;color:var(--muted);font-size:12px;letter-spacing:.5px}
+
+  @media(max-width:1024px){
+    .header__nav{display:none}
+    .header__hamburger{display:flex}
+    .header__right{display:none}
+    .hero{padding:120px 24px 40px}
+    .hero__content,.products__head,.projects__head,.footer__top{grid-template-columns:1fr;gap:32px}
+    .products__head-right{text-align:left}
+    .products__grid{grid-template-columns:repeat(3,1fr)}
+    .projects__grid{grid-template-columns:1fr 1fr}
+    .values__grid{grid-template-columns:1fr 1fr}
+    .hero__aside{padding-left:0;border-left:none;border-top:1px solid rgba(237,232,220,.15);padding-top:24px;flex-direction:row;flex-wrap:wrap;gap:24px}
+  }
+  @media(max-width:640px){
+    .container{padding:0 24px}
+    .header{padding:20px 24px}
+    .products,.projects,.values{padding:100px 0}
+    .products__grid{grid-template-columns:repeat(2,1fr)}
+    .projects__grid,.values__grid{grid-template-columns:1fr}
+    .cta__inner{padding:120px 24px}
+    .footer{padding:80px 0 32px}
+  }
+</style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="header header--transparent">
-    <a href="index.html" class="header__logo">FOUR CORNERS</a>
-    <nav class="header__nav">
-      <a href="#about" class="header__link">About</a>
-      <div class="header__dropdown">
-        <a href="#products" class="header__link">Products</a>
-        <div class="header__dropdown-menu">
-          <a href="kolbe.html" class="header__dropdown-item">Kolbe</a>
-          <a href="lepage.html" class="header__dropdown-item">Lepage</a>
-          <a href="origin.html" class="header__dropdown-item">Origin</a>
-          <a href="quartz.html" class="header__dropdown-item">Quartz</a>
-        </div>
-      </div>
-      <a href="#projects" class="header__link">Projects</a>
-      <a href="contact.html" class="header__link">Contact</a>
-    </nav>
-    <button class="header__hamburger" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
-
-  <!-- ===== MOBILE NAV ===== -->
-  <nav class="mobile-nav">
-    <button class="mobile-nav__close" aria-label="Close menu">&times;</button>
-    <a href="#about" class="mobile-nav__link">About</a>
-    <a href="#products" class="mobile-nav__link">Products</a>
-    <a href="kolbe.html" class="mobile-nav__link">Kolbe</a>
-    <a href="lepage.html" class="mobile-nav__link">Lepage</a>
-    <a href="origin.html" class="mobile-nav__link">Origin</a>
-    <a href="quartz.html" class="mobile-nav__link">Quartz</a>
-    <a href="#projects" class="mobile-nav__link">Projects</a>
-    <a href="contact.html" class="mobile-nav__link">Contact</a>
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+  <a href="index.html" class="header__logo">
+    <img src="assets/images/fcbs-emblem.png" alt="" class="header__emblem" />
+    <span class="header__logo-wordmark">Four Corners<span>Architectural</span></span>
+  </a>
+  <nav class="header__nav">
+    <a href="#about" class="header__link">About</a>
+    <a href="#products" class="header__link">Products</a>
+    <a href="#projects" class="header__link">Projects</a>
+    <a href="contact.html" class="header__link">Contact</a>
   </nav>
+  <div class="header__right">
+    <a href="contact.html" class="header__cta">Request Consultation</a>
+  </div>
+  <button class="header__hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <video
-      class="hero__video"
-      autoplay
-      muted
-      loop
-      playsinline
-      poster="assets/images/hero-fallback.jpg"
-    >
+<!-- ===== MOBILE NAV ===== -->
+<nav class="mobile-nav">
+  <button class="mobile-nav__close" aria-label="Close menu">&times;</button>
+  <a href="#about" class="mobile-nav__link">About</a>
+  <a href="#products" class="mobile-nav__link">Products</a>
+  <a href="#projects" class="mobile-nav__link">Projects</a>
+  <a href="contact.html" class="mobile-nav__link">Contact</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero__media">
+    <video autoplay muted loop playsinline poster="assets/images/hero-fallback.jpg">
       <source src="assets/video/hero.mp4" type="video/mp4" />
     </video>
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <h1 class="hero__title">Elevated Design</h1>
-      <p class="hero__subtitle">Premium windows and doors for the discerning homeowner — curated from the world's finest manufacturers.</p>
-      <a href="#products" class="btn btn-light">LEARN MORE</a>
-    </div>
-  </section>
-
-  <!-- ===== PRODUCT LINES ===== -->
-  <section class="section" id="products">
-    <div class="container">
-      <div class="text-center">
-        <h2>Our Product Lines</h2>
-        <p class="subtitle">We represent four of the industry's most respected brands, each bringing a distinct approach to craftsmanship and innovation.</p>
-      </div>
-      <div class="products-grid fade-in">
-
-        <div class="product-card">
-          <div class="product-card__image">
-            <img src="assets/images/kolbe.jpg" alt="Kolbe Windows & Doors" />
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Kolbe</h3>
-            <p class="product-card__tagline">Crafted for those who demand the finest in design and performance.</p>
-            <a href="kolbe.html" class="product-card__link">EXPLORE &rarr;</a>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card__image">
-            <img src="assets/images/lepage.jpg" alt="Lepage Millwork" />
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Lepage</h3>
-            <p class="product-card__tagline">European engineering meets North American craftsmanship.</p>
-            <a href="lepage.html" class="product-card__link">EXPLORE &rarr;</a>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card__image">
-            <img src="assets/images/origin.jpg" alt="Origin Aluminium" />
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Origin</h3>
-            <p class="product-card__tagline">Innovative aluminium solutions for modern living.</p>
-            <a href="origin.html" class="product-card__link">EXPLORE &rarr;</a>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-card__image">
-            <img src="assets/images/quartz.jpg" alt="Quartz Windows" />
-          </div>
-          <div class="product-card__body">
-            <h3 class="product-card__name">Quartz</h3>
-            <p class="product-card__tagline">Precision-engineered for energy efficiency and lasting beauty.</p>
-            <a href="quartz.html" class="product-card__link">EXPLORE &rarr;</a>
-          </div>
-        </div>
-
+  </div>
+  <div class="hero__content">
+    <div class="hero__main">
+      <div class="hero__kicker">Charleston &middot; Hardeeville &middot; Est. 2019</div>
+      <h1 class="hero__title">First Class <em>Glass</em>.</h1>
+      <div class="hero__actions">
+        <a href="#products" class="btn btn--filled">Explore Collection</a>
+        <a href="contact.html" class="btn btn--ghost">Request Consultation</a>
       </div>
     </div>
-  </section>
-
-  <!-- ===== FEATURED PROJECTS ===== -->
-  <section class="section" id="projects" style="background: var(--bg-white);">
-    <div class="container">
-      <div class="text-center">
-        <h2>Featured Projects</h2>
-        <p class="subtitle">Architectural statements crafted with precision</p>
-      </div>
-      <div class="projects-grid fade-in">
-
-        <div class="project-card">
-          <img src="assets/images/project-1.jpg" alt="Modern Residence, Charleston SC" />
-          <div class="project-card__overlay">
-            <h3 class="project-card__name">Modern Residence</h3>
-            <p class="project-card__location">Charleston, SC</p>
-            <a href="contact.html" class="project-card__link">VIEW PROJECT &rarr;</a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <img src="assets/images/project-2.jpg" alt="Mountain Estate, Kiawah Island SC" />
-          <div class="project-card__overlay">
-            <h3 class="project-card__name">Mountain Estate</h3>
-            <p class="project-card__location">Kiawah Island, SC</p>
-            <a href="contact.html" class="project-card__link">VIEW PROJECT &rarr;</a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <img src="assets/images/project-3.jpg" alt="Desert Contemporary, Sullivan's Island SC" />
-          <div class="project-card__overlay">
-            <h3 class="project-card__name">Desert Contemporary</h3>
-            <p class="project-card__location">Sullivan's Island, SC</p>
-            <a href="contact.html" class="project-card__link">VIEW PROJECT &rarr;</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== WHY FOUR CORNERS ===== -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="text-center">
-        <h2>Why Four Corners</h2>
-        <p class="subtitle">More than a supplier — a full-service architectural partner dedicated to your vision.</p>
-      </div>
-      <div class="values-grid fade-in">
-
-        <div class="value-item">
-          <h4 class="value-item__title">Expertise</h4>
-          <p class="value-item__text">Decades of combined industry experience means we can guide you through every specification, code requirement, and aesthetic decision with confidence.</p>
-        </div>
-
-        <div class="value-item">
-          <h4 class="value-item__title">Quality Craftsmanship</h4>
-          <p class="value-item__text">Every product we represent is held to an exacting standard. From raw material to finished installation, quality is never a compromise.</p>
-        </div>
-
-        <div class="value-item">
-          <h4 class="value-item__title">Full-Service Support</h4>
-          <p class="value-item__text">We handle design consultation, product selection, order management, and installation coordination — so you can focus on the project itself.</p>
-        </div>
-
-        <div class="value-item">
-          <h4 class="value-item__title">Trusted Partnership</h4>
-          <p class="value-item__text">Our relationships are built on transparency and accountability. We stand behind every product and every promise we make to our clients.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA BAND ===== -->
-  <div class="cta-band">
-    <div class="container">
-      <h2>Ready to start your project?</h2>
-      <p>Let's talk about your vision. Our team is here to help you select the perfect products and bring your design to life.</p>
-      <a href="contact.html" class="btn btn-light">REQUEST CONSULTATION</a>
+    <div class="hero__aside">
+      <div class="hero__aside-item"><strong>Est. 2019</strong>Architectural division of Four Corners Building Supply</div>
+      <div class="hero__aside-item"><strong>1,200+ Projects</strong>Across the Carolina coast</div>
+      <div class="hero__aside-item"><strong>Kolbe · Lepage · Origin · Quartz</strong>The collection</div>
     </div>
   </div>
+</section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-
-        <div>
-          <div class="footer__logo">FOUR CORNERS</div>
-          <p class="footer__text">Four Corners Building Supply's architectural division. Premium window and door solutions for distinctive design.</p>
-        </div>
-
-        <div>
-          <div class="footer__heading">Navigate</div>
-          <a href="#about" class="footer__link">About</a>
-          <a href="#products" class="footer__link">Products</a>
-          <a href="#projects" class="footer__link">Projects</a>
-          <a href="contact.html" class="footer__link">Contact</a>
-        </div>
-
-        <div>
-          <div class="footer__heading">Products</div>
-          <a href="kolbe.html" class="footer__link">Kolbe</a>
-          <a href="lepage.html" class="footer__link">Lepage</a>
-          <a href="origin.html" class="footer__link">Origin</a>
-          <a href="quartz.html" class="footer__link">Quartz</a>
-        </div>
-
-        <div>
-          <div class="footer__heading">Contact</div>
-          <p class="footer__text"><a href="tel:+18439702146" class="footer__link">(843) 970-2146</a></p>
-          <p class="footer__text"><a href="mailto:info@buildfcbs.com" class="footer__link">info@buildfcbs.com</a></p>
-          <p class="footer__text">3870 Leeds Ave #101<br />North Charleston, SC 29405</p>
-        </div>
-
+<!-- ===== PRODUCTS ===== -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="products__head">
+      <div>
+        <span class="kicker">The Collection</span>
+        <h2 style="margin-top:24px">Six companies,<br/>one standard of <em>care</em>.</h2>
       </div>
-      <div class="footer__bottom">
-        &copy; 2026 Four Corners Architectural. All rights reserved.
+      <div class="products__head-right">"Each line chosen for a specific conviction — heirloom millwork, European engineering, slender aluminium, coastal performance."</div>
+    </div>
+    <div class="products__grid">
+      <a href="kolbe.html" class="product-card">
+        <div class="product-card__img"><img src="assets/images/kolbe.jpg" alt="Kolbe Windows & Doors" /></div>
+        <div class="product-card__body">
+          <div class="product-card__num">01 · Daniel Island</div>
+          <div class="product-card__name">Kolbe</div>
+          <p class="product-card__tagline">Heirloom wood windows and doors, handcrafted since 1946.</p>
+          <span class="product-card__cta">Explore →</span>
+        </div>
+      </a>
+      <a href="lepage.html" class="product-card">
+        <div class="product-card__img"><img src="assets/images/lepage.jpg" alt="Lepage Millwork" /></div>
+        <div class="product-card__body">
+          <div class="product-card__num">02 · Sullivan's</div>
+          <div class="product-card__name">Lepage</div>
+          <p class="product-card__tagline">European engineering with North American craftsmanship.</p>
+          <span class="product-card__cta">Explore →</span>
+        </div>
+      </a>
+      <a href="origin.html" class="product-card">
+        <div class="product-card__img"><img src="assets/images/origin.jpg" alt="Origin Aluminium" /></div>
+        <div class="product-card__body">
+          <div class="product-card__num">03 · Seabrook</div>
+          <div class="product-card__name">Origin</div>
+          <p class="product-card__tagline">British-designed aluminium systems. Expansive glass, quiet strength.</p>
+          <span class="product-card__cta">Explore →</span>
+        </div>
+      </a>
+      <a href="quartz.html" class="product-card">
+        <div class="product-card__img"><img src="assets/images/quartz.jpg" alt="Quartz Windows" /></div>
+        <div class="product-card__body">
+          <div class="product-card__num">04 · Mount Pleasant</div>
+          <div class="product-card__name">Quartz</div>
+          <p class="product-card__tagline">Precision-engineered for coastal exposure and a lifetime of service.</p>
+          <span class="product-card__cta">Explore →</span>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-card__img"><img src="assets/images/gallery-5.jpg" alt="Optimum Windows" /></div>
+        <div class="product-card__body">
+          <div class="product-card__num">05 · Kiawah</div>
+          <div class="product-card__name">Optimum</div>
+          <p class="product-card__tagline">Steel-crafted windows and doors with a heritage of architectural precision.</p>
+          <span class="product-card__cta">Explore →</span>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-card__img"><img src="https://images.unsplash.com/photo-1691517534724-3732c7621407?w=1200&q=85" alt="Exclusive Wood Doors" style="object-position: 30% 30%;" /></div>
+        <div class="product-card__body">
+          <div class="product-card__num">06 · Isle of Palms</div>
+          <div class="product-card__name">Exclusive Wood Doors</div>
+          <p class="product-card__tagline">Bespoke solid-wood entry doors, built to signature specification.</p>
+          <span class="product-card__cta">Explore →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="projects__head">
+      <div>
+        <span class="kicker">Selected Works</span>
+        <h2 style="margin-top:24px">Seen on <em>the coast</em>.</h2>
       </div>
     </div>
-  </footer>
+    <div class="projects__grid">
+      <div class="proj">
+        <img src="assets/images/project-1.jpg" alt="Rutledge Residence, Charleston SC" />
+        <div class="proj__overlay">
+          <div class="proj__num">N° 001 · 2025</div>
+          <div class="proj__name">Rutledge Residence</div>
+          <div class="proj__loc">Charleston, SC</div>
+        </div>
+      </div>
+      <div class="proj">
+        <img src="assets/images/project-2.jpg" alt="Sand Dollar Cottage, Sullivan's Island SC" />
+        <div class="proj__overlay">
+          <div class="proj__num">N° 002 · 2025</div>
+          <div class="proj__name">Sand Dollar Cottage</div>
+          <div class="proj__loc">Sullivan's Island, SC</div>
+        </div>
+      </div>
+      <div class="proj">
+        <img src="assets/images/project-3.jpg" alt="Folly Cross House, Folly Beach SC" />
+        <div class="proj__overlay">
+          <div class="proj__num">N° 003 · 2024</div>
+          <div class="proj__name">Folly Cross House</div>
+          <div class="proj__loc">Folly Beach, SC</div>
+        </div>
+      </div>
+      <div class="proj">
+        <img src="assets/images/gallery-1.jpg" alt="Oyster Point, Kiawah Island SC" />
+        <div class="proj__overlay">
+          <div class="proj__num">N° 004 · 2024</div>
+          <div class="proj__name">Oyster Point</div>
+          <div class="proj__loc">Kiawah Island, SC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script src="js/main.js"></script>
+<!-- ===== VALUES ===== -->
+<section class="values" id="about">
+  <div class="container">
+    <div class="values__head">
+      <span class="kicker">Why Four Corners</span>
+      <h2>The <em>partner</em> behind the glass.</h2>
+    </div>
+    <div class="values__grid">
+      <div class="val">
+        <div class="val__num">N° i.</div>
+        <h3 class="val__title">Specification expertise</h3>
+        <p class="val__text">Decades on the Carolina coast. We know the code, the loads, and the decisions that separate a beautiful window from one that survives three hurricanes.</p>
+      </div>
+      <div class="val">
+        <div class="val__num">N° ii.</div>
+        <h3 class="val__title">Craftsmanship, curated</h3>
+        <p class="val__text">Every line we carry is held to an exacting standard. From raw timber to reveal, quality is never a line-item to value-engineer.</p>
+      </div>
+      <div class="val">
+        <div class="val__num">N° iii.</div>
+        <h3 class="val__title">Full-service support</h3>
+        <p class="val__text">Design consultation, take-offs, order management, logistics, installation coordination — a single point of accountability.</p>
+      </div>
+      <div class="val">
+        <div class="val__num">N° iv.</div>
+        <h3 class="val__title">Trusted on the coast</h3>
+        <p class="val__text">Architects, GCs, and homeowners return project after project. Our relationships are built on transparency and follow-through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta" id="cta">
+  <div class="cta__bg">
+    <img src="assets/images/gallery-2.jpg" alt="" />
+  </div>
+  <div class="cta__inner">
+    <span class="kicker" style="justify-content:center;margin-bottom:32px">Begin</span>
+    <h2>Show us <em>what</em><br/>you're building.</h2>
+    <p>Bring drawings, a Pinterest board, or a sketch on a napkin. We'll help you choose the right system and handle every detail from specification to installation.</p>
+    <div class="cta__actions">
+      <a href="contact.html" class="btn btn--filled">Request Consultation</a>
+      <a href="tel:+18439702146" class="btn">(843) 970-2146</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <div class="footer__brand"><em>Four</em> Corners</div>
+        <div class="footer__tag">Architectural Division — Est. 2019</div>
+        <p class="footer__text">"A window is the hinge between a building and the world it occupies."</p>
+      </div>
+      <div>
+        <div class="footer__heading">Navigate</div>
+        <a href="#about" class="footer__link">About</a>
+        <a href="#products" class="footer__link">Products</a>
+        <a href="#projects" class="footer__link">Projects</a>
+        <a href="contact.html" class="footer__link">Contact</a>
+      </div>
+      <div>
+        <div class="footer__heading">Collection</div>
+        <a href="kolbe.html" class="footer__link">Kolbe</a>
+        <a href="lepage.html" class="footer__link">Lepage</a>
+        <a href="origin.html" class="footer__link">Origin</a>
+        <a href="quartz.html" class="footer__link">Quartz</a>
+        <a href="#" class="footer__link">Optimum</a>
+        <a href="#" class="footer__link">Exclusive Wood Doors</a>
+      </div>
+      <div>
+        <div class="footer__heading">Studio</div>
+        <a href="tel:+18439702146" class="footer__link">(843) 970-2146</a>
+        <a href="mailto:info@buildfcbs.com" class="footer__link">info@buildfcbs.com</a>
+        <p class="footer__link" style="margin-top:12px">3870 Leeds Ave #101<br/>N. Charleston, SC 29405</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© MMXXVI · Four Corners Architectural</div>
+      <div>Charleston &middot; Hardeeville</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('header--solid', window.scrollY > 80);
+  }, { passive: true });
+
+  const hamburger = document.querySelector('.header__hamburger');
+  const mobileNav = document.querySelector('.mobile-nav');
+  const mobileClose = document.querySelector('.mobile-nav__close');
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+    if (mobileClose) mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+    mobileNav.querySelectorAll('.mobile-nav__link').forEach(link => {
+      link.addEventListener('click', () => mobileNav.classList.remove('open'));
+    });
+  }
+</script>
+
 </body>
 </html>
