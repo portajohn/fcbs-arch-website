@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Four Corners Architectural — Elevated Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg-cream:#f3efe9;
+    --bg-warm:#ebe5dc;
+    --bg-white:#ffffff;
+    --bg-dark:#1a1a1a;
+    --text-primary:#1a1a1a;
+    --text-secondary:#666666;
+    --text-muted:#999999;
+    --text-light:#f3efe9;
+    --accent:#9e785a;
+    --accent-hover:#8a6a4e;
+    --border:#e0dbd4;
+    --container:1240px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Montserrat',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--text-primary);background:var(--bg-cream);-webkit-font-smoothing:antialiased}
+  img,video{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,h4{font-family:'Playfair Display',Georgia,serif;font-weight:400;line-height:1.1;letter-spacing:-0.01em}
+  h1{font-size:clamp(42px,6.2vw,84px)}
+  h2{font-size:clamp(32px,4.2vw,54px);margin-bottom:20px}
+  h3{font-size:28px}
+  h4{font-size:22px}
+  p{text-wrap:pretty}
+
+  .container{max-width:var(--container);margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:var(--accent);margin-bottom:20px;display:inline-block}
+  .subtitle{color:var(--text-secondary);font-size:17px;max-width:620px;margin:0 auto 64px;line-height:1.7}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-hover)}
+  .btn-light{background:transparent;border:1px solid rgba(255,255,255,.6);color:#fff}
+  .btn-light:hover{background:#fff;color:var(--bg-dark);border-color:#fff}
+  .btn-outline{background:transparent;border:1px solid var(--accent);color:var(--accent)}
+  .btn-outline:hover{background:var(--accent);color:#fff}
+
+  /* Header */
+  .header{position:fixed;top:0;left:0;right:0;z-index:100;height:84px;display:flex;align-items:center;padding:0 40px;transition:background .35s,box-shadow .35s,color .35s}
+  .header--transparent{background:transparent;color:#fff}
+  .header--solid{background:rgba(243,239,233,.96);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--border);color:var(--text-primary)}
+  .header__logo{font-family:'Playfair Display',serif;font-size:20px;letter-spacing:.5px;font-weight:500}
+  .header__logo small{display:block;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:3.5px;font-weight:600;text-transform:uppercase;opacity:.7;margin-top:2px}
+  .header__nav{margin-left:auto;display:flex;align-items:center;gap:36px}
+  .header__link{font-weight:500;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;transition:color .3s;position:relative}
+  .header__link:hover{color:var(--accent)}
+  .header__cta{padding:10px 22px;border:1px solid currentColor;font-size:11px;letter-spacing:2px;font-weight:600;text-transform:uppercase;transition:all .3s}
+  .header--solid .header__cta:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .header--transparent .header__cta:hover{background:#fff;color:var(--bg-dark);border-color:#fff}
+
+  /* Hero */
+  .hero{position:relative;height:100vh;min-height:720px;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+  .hero__media{position:absolute;inset:0;z-index:0}
+  .hero__media img{width:100%;height:100%;object-fit:cover}
+  .hero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.7) 100%)}
+  .hero__content{position:relative;z-index:2;padding:0 64px 90px;max-width:1400px;width:100%}
+  .hero__eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:28px;display:flex;align-items:center;gap:16px}
+  .hero__eyebrow::before{content:"";width:40px;height:1px;background:rgba(255,255,255,.6)}
+  .hero__title{font-size:clamp(52px,8vw,120px);line-height:.98;margin-bottom:28px;font-weight:400;letter-spacing:-0.02em;max-width:1000px}
+  .hero__title em{font-style:italic;font-weight:400}
+  .hero__subtitle{font-size:18px;max-width:540px;margin-bottom:40px;color:rgba(255,255,255,.88);line-height:1.6}
+  .hero__actions{display:flex;gap:16px;flex-wrap:wrap}
+  .hero__scroll{position:absolute;bottom:40px;right:64px;z-index:2;font-size:10px;letter-spacing:3px;writing-mode:vertical-rl;color:rgba(255,255,255,.7);font-weight:600;text-transform:uppercase}
+  .hero__scroll::after{content:"";display:block;width:1px;height:48px;background:rgba(255,255,255,.4);margin:16px auto 0;animation:scrollHint 2s infinite}
+  @keyframes scrollHint{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.6)}}
+
+  /* Intro strip */
+  .intro{padding:130px 0 110px;text-align:center}
+  .intro__kicker{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:28px}
+  .intro__text{font-family:'Playfair Display',serif;font-size:clamp(26px,3.4vw,40px);line-height:1.35;max-width:880px;margin:0 auto;font-weight:400;letter-spacing:-0.01em;color:var(--text-primary)}
+  .intro__text em{color:var(--accent);font-style:italic}
+
+  /* Products */
+  .products{padding:120px 0;background:var(--bg-white)}
+  .section__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:72px;gap:48px}
+  .section__head-left h2{margin-bottom:0;max-width:560px}
+  .section__head-right{max-width:380px;color:var(--text-secondary);font-size:15px;line-height:1.7;padding-bottom:8px}
+  .products__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .product-card{position:relative;background:var(--bg-cream);overflow:hidden;cursor:pointer;transition:transform .4s}
+  .product-card:hover{transform:translateY(-6px)}
+  .product-card__image{aspect-ratio:3/4;overflow:hidden;position:relative}
+  .product-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+  .product-card:hover .product-card__image img{transform:scale(1.06)}
+  .product-card__index{position:absolute;top:20px;left:20px;z-index:2;color:#fff;font-size:11px;letter-spacing:2px;font-weight:600}
+  .product-card__body{padding:28px 24px 32px;position:relative}
+  .product-card__name{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:10px;font-weight:500}
+  .product-card__tagline{color:var(--text-secondary);font-size:14px;line-height:1.6;margin-bottom:22px;min-height:64px}
+  .product-card__link{font-size:11px;letter-spacing:2.5px;font-weight:600;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:8px;transition:gap .3s}
+  .product-card:hover .product-card__link{gap:14px}
+
+  /* Projects */
+  .projects{padding:140px 0;background:var(--bg-cream)}
+  .projects__grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+  .project-card{position:relative;overflow:hidden;cursor:pointer}
+  .project-card img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+  .project-card:hover img{transform:scale(1.05)}
+  .project-card__overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.75));display:flex;flex-direction:column;justify-content:flex-end;padding:32px;color:#fff}
+  .project-card__meta{display:flex;gap:20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.75);margin-bottom:12px}
+  .project-card__name{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;letter-spacing:-0.01em;margin-bottom:8px}
+  .project-card__location{font-size:13px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:8px}
+  .project-card--tall{grid-column:span 5;aspect-ratio:4/5}
+  .project-card--wide{grid-column:span 7;aspect-ratio:7/5}
+  .project-card--sq{grid-column:span 6;aspect-ratio:6/4}
+
+  /* Values / Why */
+  .values{padding:140px 0;background:var(--bg-white)}
+  .values__layout{display:grid;grid-template-columns:1fr 1.4fr;gap:100px;align-items:start}
+  .values__head h2{margin-bottom:24px}
+  .values__head p{color:var(--text-secondary);font-size:16px;line-height:1.8;margin-bottom:32px}
+  .values__sig{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:var(--accent)}
+  .values__list{display:grid;grid-template-columns:1fr 1fr;gap:56px 48px}
+  .value-item{position:relative;padding-top:28px;border-top:1px solid var(--border)}
+  .value-item__num{font-family:'Playfair Display',serif;font-size:13px;color:var(--accent);position:absolute;top:-10px;left:0;background:var(--bg-white);padding-right:12px;font-style:italic}
+  .value-item__title{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:14px;font-weight:500}
+  .value-item__text{color:var(--text-secondary);line-height:1.75;font-size:15px}
+
+  /* Stats band */
+  .stats{padding:80px 0;background:var(--bg-warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px;text-align:center}
+  .stat__num{font-family:'Playfair Display',serif;font-size:64px;color:var(--accent);font-weight:400;line-height:1;margin-bottom:12px;letter-spacing:-0.02em}
+  .stat__label{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-secondary);font-weight:600}
+
+  /* CTA band */
+  .cta{background:var(--bg-dark);color:#fff;padding:140px 0;position:relative;overflow:hidden;text-align:center}
+  .cta::before{content:"";position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80') center/cover;opacity:.18}
+  .cta__inner{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:0 32px}
+  .cta h2{color:#fff;margin-bottom:20px}
+  .cta p{color:rgba(255,255,255,.75);font-size:17px;line-height:1.7;margin-bottom:40px}
+
+  /* Footer */
+  .footer{background:#111;color:#fff;padding:100px 0 40px}
+  .footer__top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:64px;padding-bottom:72px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .footer__brand{font-family:'Playfair Display',serif;font-size:24px;font-weight:500;margin-bottom:4px}
+  .footer__tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:24px}
+  .footer__text{color:rgba(255,255,255,.55);font-size:14px;line-height:1.8;max-width:320px}
+  .footer__heading{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#fff;font-weight:600;margin-bottom:22px}
+  .footer__link{display:block;color:rgba(255,255,255,.55);font-size:14px;margin-bottom:12px;transition:color .3s}
+  .footer__link:hover{color:var(--accent)}
+  .footer__bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;color:rgba(255,255,255,.35);font-size:12px;letter-spacing:.5px}
+  .footer__social{display:flex;gap:20px}
+  .footer__social a{color:rgba(255,255,255,.55);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+  .footer__social a:hover{color:var(--accent)}
+
+  @media(max-width:1024px){
+    .products__grid{grid-template-columns:repeat(2,1fr)}
+    .project-card--tall,.project-card--wide,.project-card--sq{grid-column:span 12;aspect-ratio:4/3}
+    .values__layout{grid-template-columns:1fr;gap:56px}
+    .stats__grid{grid-template-columns:repeat(2,1fr)}
+    .footer__top{grid-template-columns:1fr 1fr;gap:48px}
+    .header__nav .header__link{display:none}
+    .hero__content{padding:0 32px 70px}
+    .hero__scroll{display:none}
+    .section__head{flex-direction:column;align-items:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header header--transparent" id="header">
+  <a href="#" class="header__logo">Four Corners<small>Architectural</small></a>
+  <nav class="header__nav">
+    <a href="#intro" class="header__link">About</a>
+    <a href="#products" class="header__link">Products</a>
+    <a href="#projects" class="header__link">Projects</a>
+    <a href="#" class="header__link">Journal</a>
+    <a href="#contact" class="header__cta">Request Consultation</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__media">
+    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2000&q=85" alt="" />
+  </div>
+  <div class="hero__content">
+    <div class="hero__eyebrow">Charleston · Kiawah · Sullivan's · Folly</div>
+    <h1 class="hero__title">Windows that frame <em>a way of life</em>.</h1>
+    <p class="hero__subtitle">Four premium fenestration houses. One trusted partner for Lowcountry homes, chosen by architects, builders, and the people who live in them.</p>
+    <div class="hero__actions">
+      <a href="#products" class="btn btn-primary">Explore Product Lines</a>
+      <a href="#contact" class="btn btn-light">Request Consultation</a>
+    </div>
+  </div>
+  <div class="hero__scroll">Scroll</div>
+</section>
+
+<!-- Intro -->
+<section class="intro" id="intro">
+  <div class="container">
+    <div class="intro__kicker">Our Philosophy</div>
+    <p class="intro__text">A window is the hinge between a building and the world it occupies. We believe Lowcountry light, salt air, and hurricane-grade engineering deserve <em>the same measure of craft</em> — from the first consultation to the final reveal.</p>
+  </div>
+</section>
+
+<!-- Product lines -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="section__head">
+      <div class="section__head-left">
+        <span class="eyebrow">Product Lines</span>
+        <h2>Four houses.<br/>One standard.</h2>
+      </div>
+      <div class="section__head-right">
+        Each line we carry is chosen for a reason — Kolbe for heirloom millwork, Lepage for European engineering, Origin for slender aluminium, Quartz for uncompromised performance. We'll help you pick the right fit for your project.
+      </div>
+    </div>
+    <div class="products__grid">
+      <a href="#" class="product-card">
+        <div class="product-card__image">
+          <span class="product-card__index">01 / Kolbe</span>
+          <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80" alt="Kolbe" />
+        </div>
+        <div class="product-card__body">
+          <div class="product-card__name">Kolbe</div>
+          <p class="product-card__tagline">Wisconsin-made heirloom windows, built without compromise since 1946.</p>
+          <span class="product-card__link">Explore <span>→</span></span>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-card__image">
+          <span class="product-card__index">02 / Lepage</span>
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Lepage" />
+        </div>
+        <div class="product-card__body">
+          <div class="product-card__name">Lepage</div>
+          <p class="product-card__tagline">European engineering with North American craftsmanship — slim sightlines, silent performance.</p>
+          <span class="product-card__link">Explore <span>→</span></span>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-card__image">
+          <span class="product-card__index">03 / Origin</span>
+          <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80" alt="Origin" />
+        </div>
+        <div class="product-card__body">
+          <div class="product-card__name">Origin</div>
+          <p class="product-card__tagline">British-designed aluminium systems for modern living — expansive glass, quiet strength.</p>
+          <span class="product-card__link">Explore <span>→</span></span>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-card__image">
+          <span class="product-card__index">04 / Quartz</span>
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80" alt="Quartz" />
+        </div>
+        <div class="product-card__body">
+          <div class="product-card__name">Quartz</div>
+          <p class="product-card__tagline">Precision-engineered for coastal performance, energy efficiency, and a lifetime of service.</p>
+          <span class="product-card__link">Explore <span>→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="section__head">
+      <div class="section__head-left">
+        <span class="eyebrow">Featured Projects</span>
+        <h2>Seen on the coast.</h2>
+      </div>
+      <div class="section__head-right">A selection of recent Lowcountry installations — from marsh-front moderns on Kiawah to weathered cottages on Folly Beach.</div>
+    </div>
+    <div class="projects__grid">
+      <div class="project-card project-card--tall">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1000&q=85" alt="" />
+        <div class="project-card__overlay">
+          <div class="project-card__meta"><span>001</span><span>2025</span><span>Residential</span></div>
+          <div class="project-card__name">Marsh Light House</div>
+          <div class="project-card__location">Kiawah Island, SC</div>
+        </div>
+      </div>
+      <div class="project-card project-card--wide">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&q=85" alt="" />
+        <div class="project-card__overlay">
+          <div class="project-card__meta"><span>002</span><span>2025</span><span>Residential</span></div>
+          <div class="project-card__name">Rutledge Residence</div>
+          <div class="project-card__location">Charleston, SC</div>
+        </div>
+      </div>
+      <div class="project-card project-card--sq">
+        <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1200&q=85" alt="" />
+        <div class="project-card__overlay">
+          <div class="project-card__meta"><span>003</span><span>2024</span><span>Residential</span></div>
+          <div class="project-card__name">Sand Dollar Cottage</div>
+          <div class="project-card__location">Sullivan's Island, SC</div>
+        </div>
+      </div>
+      <div class="project-card project-card--sq">
+        <img src="https://images.unsplash.com/photo-1613553474179-e1eda3ea5734?w=1200&q=85" alt="" />
+        <div class="project-card__overlay">
+          <div class="project-card__meta"><span>004</span><span>2024</span><span>Residential</span></div>
+          <div class="project-card__name">Folly Cross House</div>
+          <div class="project-card__location">Folly Beach, SC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <div class="stats__grid">
+      <div class="stat"><div class="stat__num">1,200+</div><div class="stat__label">Projects Delivered</div></div>
+      <div class="stat"><div class="stat__num">4</div><div class="stat__label">Premium Brands</div></div>
+      <div class="stat"><div class="stat__num">78</div><div class="stat__label">Years Combined Experience</div></div>
+      <div class="stat"><div class="stat__num">100%</div><div class="stat__label">Coast-Rated Systems</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Values / Why -->
+<section class="values">
+  <div class="container">
+    <div class="values__layout">
+      <div class="values__head">
+        <span class="eyebrow">Why Four Corners</span>
+        <h2>The partner behind the glass.</h2>
+        <p>More than a supplier. We work shoulder-to-shoulder with architects, builders, and homeowners from schematic design through punch-list — translating intent into specification, detail, and a window that performs for decades.</p>
+        <div class="values__sig">— The Four Corners team</div>
+      </div>
+      <div class="values__list">
+        <div class="value-item">
+          <span class="value-item__num">I</span>
+          <div class="value-item__title">Specification Expertise</div>
+          <p class="value-item__text">Decades on the Carolina coast means we know the code, the loads, and the subtle decisions that separate a beautiful window from one that survives three hurricanes.</p>
+        </div>
+        <div class="value-item">
+          <span class="value-item__num">II</span>
+          <div class="value-item__title">Craftsmanship, Curated</div>
+          <p class="value-item__text">Every line we carry is held to an exacting standard. From raw timber to finished reveal, quality is never a line-item to be value-engineered.</p>
+        </div>
+        <div class="value-item">
+          <span class="value-item__num">III</span>
+          <div class="value-item__title">Full-Service Support</div>
+          <p class="value-item__text">Design consultation, take-offs, order management, logistics, installation coordination — a single point of accountability from drawing to delivery.</p>
+        </div>
+        <div class="value-item">
+          <span class="value-item__num">IV</span>
+          <div class="value-item__title">Trusted on the Coast</div>
+          <p class="value-item__text">Architects, GCs, and homeowners return to us project after project. Our relationships are built on transparency, follow-through, and showing up when we say we will.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta__inner">
+    <span class="eyebrow" style="color:rgba(255,255,255,.8)">Start Your Project</span>
+    <h2>Let's talk about what you're building.</h2>
+    <p>Bring us drawings, a Pinterest board, or just a sketch on a napkin. Our team will help you choose the right system and handle every detail from specification to installation.</p>
+    <a href="#" class="btn btn-light">Request Consultation →</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <div class="footer__brand">Four Corners</div>
+        <div class="footer__tag">Architectural Division</div>
+        <p class="footer__text">Four Corners Building Supply's architectural division. Premium window and door solutions for distinctive homes on the South Carolina coast.</p>
+      </div>
+      <div>
+        <div class="footer__heading">Navigate</div>
+        <a href="#" class="footer__link">About</a>
+        <a href="#products" class="footer__link">Products</a>
+        <a href="#projects" class="footer__link">Projects</a>
+        <a href="#" class="footer__link">Journal</a>
+        <a href="#contact" class="footer__link">Contact</a>
+      </div>
+      <div>
+        <div class="footer__heading">Product Lines</div>
+        <a href="#" class="footer__link">Kolbe</a>
+        <a href="#" class="footer__link">Lepage</a>
+        <a href="#" class="footer__link">Origin</a>
+        <a href="#" class="footer__link">Quartz</a>
+      </div>
+      <div>
+        <div class="footer__heading">Studio</div>
+        <a href="tel:+18439702146" class="footer__link">(843) 970-2146</a>
+        <a href="mailto:info@buildfcbs.com" class="footer__link">info@buildfcbs.com</a>
+        <p class="footer__link" style="margin-top:12px">3870 Leeds Ave #101<br/>North Charleston, SC 29405</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© 2026 Four Corners Architectural — A division of Four Corners Building Supply</div>
+      <div class="footer__social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header=document.getElementById('header');
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>60){header.classList.remove('header--transparent');header.classList.add('header--solid')}
+    else{header.classList.add('header--transparent');header.classList.remove('header--solid')}
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Four Corners Architectural — Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#ece5d8;           /* deeper cream, warmer */
+    --bg-2:#e1d8c6;
+    --paper:#f5efe3;
+    --ink:#1c1a15;
+    --ink-2:#3a342a;
+    --muted:#7a7060;
+    --line:#c8bfa9;
+    --accent:#b88847;       /* warmer tan, deeper */
+    --accent-2:#7a3b1f;     /* oxblood */
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:'Cormorant Garamond',serif;font-weight:400;letter-spacing:-0.01em}
+
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.02;letter-spacing:-0.02em}
+  h1{font-size:clamp(60px,11vw,180px)}
+  h2{font-size:clamp(44px,7vw,96px)}
+  h3{font-size:36px}
+  p{text-wrap:pretty}
+
+  .container{max-width:1400px;margin:0 auto;padding:0 48px}
+  .container--narrow{max-width:1100px}
+  .kicker{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3.5px;text-transform:uppercase;font-weight:500;color:var(--ink-2);display:inline-flex;align-items:center;gap:14px}
+  .kicker::before{content:"";width:32px;height:1px;background:var(--ink-2)}
+  .kicker--light{color:rgba(255,255,255,.8)}
+  .kicker--light::before{background:rgba(255,255,255,.6)}
+
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:18px 0;font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:3px;text-transform:uppercase;background:transparent;border:none;cursor:pointer;color:var(--ink);border-bottom:1px solid var(--ink);transition:gap .3s,color .3s,border-color .3s}
+  .btn:hover{gap:22px;color:var(--accent);border-color:var(--accent)}
+  .btn--light{color:#fff;border-bottom-color:#fff}
+  .btn--light:hover{color:var(--accent);border-color:var(--accent)}
+  .btn--filled{padding:18px 32px;background:var(--ink);color:var(--paper);border:none}
+  .btn--filled:hover{background:var(--accent);color:#fff;gap:22px}
+
+  /* Header */
+  .header{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .4s;color:#fff;mix-blend-mode:difference}
+  .header__logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;letter-spacing:-.01em;font-style:italic;color:#fff}
+  .header__nav{display:flex;gap:36px}
+  .header__link{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;color:#fff}
+  .header__link:hover{opacity:.6}
+
+  /* Hero */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:140px 48px 48px;overflow:hidden;color:#fff;background:#1a1712}
+  .hero__bg{position:absolute;inset:0;z-index:0}
+  .hero__bg img{width:100%;height:100%;object-fit:cover;opacity:.62}
+  .hero__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,23,18,.2) 0%,rgba(26,23,18,.05) 50%,rgba(26,23,18,.85) 100%)}
+  .hero__top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;max-width:1400px;margin:0 auto;width:100%}
+  .hero__badge{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:500;line-height:1.6}
+  .hero__badge strong{color:#fff;font-weight:600;display:block;letter-spacing:4px}
+  .hero__title-wrap{position:relative;z-index:2;max-width:1400px;margin:0 auto;width:100%;padding:80px 0 40px}
+  .hero__title{font-size:clamp(68px,13vw,220px);line-height:.88;font-weight:300;letter-spacing:-0.04em;color:#fff}
+  .hero__title em{font-style:italic;font-weight:400;color:var(--accent)}
+  .hero__title .light{font-weight:300;opacity:.95}
+  .hero__bottom{position:relative;z-index:2;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:64px;align-items:end;max-width:1400px;margin:0 auto;width:100%}
+  .hero__lede{font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.3;font-weight:400;color:rgba(255,255,255,.92);font-style:italic;max-width:520px}
+  .hero__meta{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:500;line-height:2}
+  .hero__meta strong{color:#fff;font-weight:600}
+
+  /* Running marquee strip */
+  .marquee{background:var(--ink);color:var(--paper);padding:28px 0;overflow:hidden;position:relative;white-space:nowrap}
+  .marquee__inner{display:inline-flex;gap:60px;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;font-style:italic;letter-spacing:-.01em;animation:marquee 40s linear infinite}
+  .marquee__inner span{display:inline-flex;align-items:center;gap:60px}
+  .marquee__inner span::after{content:"✦";color:var(--accent);font-size:16px;font-style:normal}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+
+  /* Intro */
+  .intro{padding:200px 0 160px;background:var(--paper);position:relative}
+  .intro__grid{display:grid;grid-template-columns:1fr 2fr;gap:120px;align-items:start}
+  .intro__label{padding-top:16px}
+  .intro__label .kicker{margin-bottom:0}
+  .intro__label .folio{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--muted);margin-top:40px;display:block}
+  .intro__body{max-width:820px}
+  .intro__headline{font-size:clamp(40px,5.4vw,72px);line-height:1.08;font-weight:400;letter-spacing:-0.02em;margin-bottom:48px}
+  .intro__headline em{font-style:italic;color:var(--accent)}
+  .intro__columns{columns:2;column-gap:56px;font-size:16px;line-height:1.8;color:var(--ink-2)}
+  .intro__columns p{margin-bottom:20px;break-inside:avoid}
+  .intro__drop{font-family:'Cormorant Garamond',serif;float:left;font-size:80px;line-height:.8;margin:8px 12px 0 0;color:var(--accent);font-style:italic}
+
+  /* Products — editorial vertical listing */
+  .products{padding:160px 0;background:var(--bg)}
+  .products__head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:80px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+  .products__head h2{max-width:800px}
+  .products__head-right{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--muted);max-width:360px;text-align:right}
+
+  .product-row{display:grid;grid-template-columns:80px 1.3fr 1fr 200px;gap:48px;align-items:center;padding:40px 0;border-bottom:1px solid var(--line);transition:background .3s,padding .3s;position:relative}
+  .product-row:hover{padding-left:24px}
+  .product-row:hover .product-row__preview{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .product-row__num{font-family:'Cormorant Garamond',serif;font-size:64px;color:var(--accent);font-style:italic;font-weight:400;line-height:1}
+  .product-row__name{font-family:'Cormorant Garamond',serif;font-size:56px;line-height:1;font-weight:400;letter-spacing:-0.02em}
+  .product-row__name small{display:block;font-family:'Inter',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:12px;font-weight:500}
+  .product-row__desc{color:var(--ink-2);font-size:15px;line-height:1.65;max-width:380px}
+  .product-row__cta{justify-self:end;font-size:10px;letter-spacing:3px;text-transform:uppercase;font-weight:500;color:var(--ink);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--ink);padding-bottom:6px;transition:gap .3s,color .3s,border-color .3s}
+  .product-row:hover .product-row__cta{gap:18px;color:var(--accent);border-color:var(--accent)}
+  .product-row__preview{position:absolute;top:50%;right:280px;width:180px;height:240px;transform:translate(0,-50%) scale(.9);opacity:0;transition:all .5s;pointer-events:none;z-index:3;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+  .product-row__preview img{width:100%;height:100%;object-fit:cover}
+
+  /* Featured project — editorial spread */
+  .feature{padding:180px 0;background:var(--paper)}
+  .feature__grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
+  .feature__img{position:relative;aspect-ratio:4/5}
+  .feature__img img{width:100%;height:100%;object-fit:cover}
+  .feature__img .folio{position:absolute;top:24px;left:24px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#fff;background:rgba(0,0,0,.3);padding:6px 14px;backdrop-filter:blur(10px)}
+  .feature__body .kicker{margin-bottom:32px}
+  .feature__title{font-size:clamp(48px,6vw,88px);line-height:.95;margin-bottom:28px;font-weight:400;letter-spacing:-0.025em}
+  .feature__title em{font-style:italic;color:var(--accent)}
+  .feature__loc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--muted);margin-bottom:40px}
+  .feature__text{font-size:16px;line-height:1.8;color:var(--ink-2);max-width:520px;margin-bottom:40px}
+  .feature__specs{display:grid;grid-template-columns:1fr 1fr;gap:28px 48px;margin-bottom:48px;padding:32px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .spec__label{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:6px}
+  .spec__value{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--ink)}
+
+  /* Projects grid */
+  .projects{padding:160px 0;background:var(--bg)}
+  .projects__head{margin-bottom:72px}
+  .projects__head h2{margin-bottom:12px}
+  .projects__head p{color:var(--muted);font-size:18px;font-family:'Cormorant Garamond',serif;font-style:italic}
+  .projects__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 32px}
+  .proj{cursor:pointer}
+  .proj__img{aspect-ratio:3/4;overflow:hidden;margin-bottom:24px}
+  .proj__img img{width:100%;height:100%;object-fit:cover;transition:transform 1s,filter .6s;filter:saturate(.85) contrast(1.02)}
+  .proj:hover .proj__img img{transform:scale(1.04);filter:saturate(1) contrast(1)}
+  .proj__meta{display:flex;justify-content:space-between;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px}
+  .proj__name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;letter-spacing:-0.01em;margin-bottom:4px}
+  .proj__loc{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--muted);font-size:16px}
+
+  /* Values — letterpress style */
+  .values{padding:180px 0;background:var(--ink);color:var(--paper)}
+  .values__head{text-align:center;margin-bottom:100px}
+  .values__head .kicker{color:rgba(255,255,255,.7);justify-content:center}
+  .values__head .kicker::before{background:rgba(255,255,255,.7)}
+  .values__head h2{color:var(--paper);margin-top:24px;max-width:900px;margin-left:auto;margin-right:auto}
+  .values__head h2 em{color:var(--accent);font-style:italic}
+  .values__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:72px 96px;max-width:1100px;margin:0 auto}
+  .val{position:relative;padding-left:64px}
+  .val__num{position:absolute;left:0;top:4px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:36px;color:var(--accent);font-weight:400;line-height:1}
+  .val__title{font-family:'Cormorant Garamond',serif;font-size:34px;margin-bottom:18px;font-weight:400;letter-spacing:-0.01em;color:var(--paper)}
+  .val__text{color:rgba(245,239,227,.65);line-height:1.8;font-size:15px;max-width:420px}
+
+  /* CTA */
+  .cta{padding:180px 0;background:var(--accent);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .cta::before,.cta::after{content:"";position:absolute;width:1px;background:rgba(255,255,255,.25)}
+  .cta::before{left:48px;top:0;bottom:0}
+  .cta::after{right:48px;top:0;bottom:0}
+  .cta .kicker{color:rgba(255,255,255,.9);justify-content:center;margin-bottom:32px}
+  .cta .kicker::before{background:rgba(255,255,255,.9)}
+  .cta__title{font-size:clamp(52px,8vw,130px);line-height:.95;font-weight:300;letter-spacing:-0.03em;margin-bottom:48px;max-width:1100px;margin-inline:auto}
+  .cta__title em{font-style:italic;font-weight:400}
+  .cta__actions{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+  .cta .btn{color:#fff;border-bottom-color:#fff;font-weight:500}
+  .cta .btn:hover{color:var(--ink);border-color:var(--ink)}
+
+  /* Footer */
+  .footer{padding:100px 0 40px;background:var(--paper);color:var(--ink)}
+  .footer__top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:64px;padding-bottom:80px;border-bottom:1px solid var(--line)}
+  .footer__brand{font-family:'Cormorant Garamond',serif;font-size:56px;font-style:italic;font-weight:400;line-height:.9;letter-spacing:-0.02em;margin-bottom:16px}
+  .footer__tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:32px}
+  .footer__text{color:var(--ink-2);font-size:15px;line-height:1.7;max-width:340px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px}
+  .footer__heading{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:22px}
+  .footer__link{display:block;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);margin-bottom:10px;transition:color .3s}
+  .footer__link:hover{color:var(--accent);font-style:italic}
+  .footer__bottom{display:flex;justify-content:space-between;padding-top:32px;color:var(--muted);font-size:12px;letter-spacing:.5px}
+
+  @media(max-width:1024px){
+    .header__nav{display:none}
+    .hero__bottom{grid-template-columns:1fr;gap:32px}
+    .intro__grid,.feature__grid,.values__grid{grid-template-columns:1fr;gap:48px}
+    .products__grid,.projects__grid{grid-template-columns:1fr 1fr}
+    .product-row{grid-template-columns:60px 1fr;gap:24px}
+    .product-row__desc,.product-row__cta{grid-column:2;justify-self:start}
+    .footer__top{grid-template-columns:1fr 1fr;gap:48px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <a href="#" class="header__logo">Four Corners<span style="font-style:normal;font-size:10px;letter-spacing:3px;margin-left:8px;font-weight:500;vertical-align:middle;">ARCHITECTURAL</span></a>
+  <nav class="header__nav">
+    <a href="#intro" class="header__link">About</a>
+    <a href="#products" class="header__link">Products</a>
+    <a href="#projects" class="header__link">Projects</a>
+    <a href="#" class="header__link">Journal</a>
+    <a href="#cta" class="header__link">Contact</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero__bg">
+    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=2000&q=85" alt="" />
+  </div>
+  <div class="hero__top">
+    <div class="hero__badge"><strong>Est. 2002</strong>The Architectural Division<br/>of Four Corners Building Supply</div>
+    <div class="hero__badge" style="text-align:right"><strong>32°46′N / 79°55′W</strong>Charleston, South Carolina</div>
+  </div>
+  <div class="hero__title-wrap">
+    <h1 class="hero__title"><span class="light">Windows</span><br/>for a <em>considered</em><br/>life.</h1>
+  </div>
+  <div class="hero__bottom">
+    <p class="hero__lede">"A house's relationship with light, air, and landscape is written in the glass it chooses."</p>
+    <div class="hero__meta"><strong>Issue N°  007</strong>Spring 2026<br/>Four Corners Review</div>
+    <div class="hero__meta" style="text-align:right">Kolbe · Lepage<br/>Origin · Quartz</div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee">
+  <div class="marquee__inner">
+    <span>Kolbe</span><span>Lepage</span><span>Origin</span><span>Quartz</span>
+    <span>Charleston</span><span>Kiawah</span><span>Sullivan's Island</span><span>Folly Beach</span>
+    <span>Kolbe</span><span>Lepage</span><span>Origin</span><span>Quartz</span>
+    <span>Charleston</span><span>Kiawah</span><span>Sullivan's Island</span><span>Folly Beach</span>
+  </div>
+</div>
+
+<!-- Intro -->
+<section class="intro" id="intro">
+  <div class="container">
+    <div class="intro__grid">
+      <div class="intro__label">
+        <span class="kicker">§ 01 · Philosophy</span>
+        <span class="folio">Four Corners, Charleston</span>
+      </div>
+      <div class="intro__body">
+        <h2 class="intro__headline">A window is the <em>hinge</em> between a building and the world it occupies.</h2>
+        <div class="intro__columns">
+          <p><span class="intro__drop">W</span>e believe Lowcountry light, salt air, and hurricane-grade engineering deserve the same measure of craft — from the first conversation to the final reveal. Our work is equal parts specification, curation, and follow-through.</p>
+          <p>For more than two decades, architects and builders across the Carolina coast have turned to Four Corners when a window needs to do more than close. We work in catalogs, shop drawings, and site visits — but mostly in the small decisions that compound into a finished room.</p>
+          <p>Our job is to make those decisions visible, then make them easy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="products" id="products">
+  <div class="container">
+    <div class="products__head">
+      <div>
+        <span class="kicker">§ 02 · The Collection</span>
+        <h2 style="margin-top:24px">Four houses.<br/>One standard of <em style="font-style:italic;color:var(--accent)">care</em>.</h2>
+      </div>
+      <div class="products__head-right">Each chosen for a specific conviction — heirloom millwork, European engineering, slender aluminium, coastal performance.</div>
+    </div>
+
+    <a href="#" class="product-row">
+      <div class="product-row__num">i.</div>
+      <div class="product-row__name">Kolbe<small>Wausau, Wisconsin · Est. 1946</small></div>
+      <div class="product-row__desc">Heirloom wood windows and doors, handcrafted for homes where every detail answers to a drawing.</div>
+      <div class="product-row__cta">Read More →</div>
+      <div class="product-row__preview"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=400&q=80" alt="" /></div>
+    </a>
+
+    <a href="#" class="product-row">
+      <div class="product-row__num">ii.</div>
+      <div class="product-row__name">Lepage<small>Boucherville, Québec · Est. 1957</small></div>
+      <div class="product-row__desc">European tilt-turn engineering with North American craftsmanship — silent operation, slim sightlines, exceptional thermal performance.</div>
+      <div class="product-row__cta">Read More →</div>
+      <div class="product-row__preview"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=80" alt="" /></div>
+    </a>
+
+    <a href="#" class="product-row">
+      <div class="product-row__num">iii.</div>
+      <div class="product-row__name">Origin<small>Gloucestershire, UK · Est. 2002</small></div>
+      <div class="product-row__desc">British-designed aluminium window, door, and bi-fold systems — expansive glass, quiet strength, a twenty-year guarantee.</div>
+      <div class="product-row__cta">Read More →</div>
+      <div class="product-row__preview"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&q=80" alt="" /></div>
+    </a>
+
+    <a href="#" class="product-row">
+      <div class="product-row__num">iv.</div>
+      <div class="product-row__name">Quartz<small>Saint-Malo, QC · Est. 1974</small></div>
+      <div class="product-row__desc">Precision-engineered wood and clad systems built for coastal exposure, energy efficiency, and generational service.</div>
+      <div class="product-row__cta">Read More →</div>
+      <div class="product-row__preview"><img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=400&q=80" alt="" /></div>
+    </a>
+  </div>
+</section>
+
+<!-- Feature spread -->
+<section class="feature">
+  <div class="container">
+    <div class="feature__grid">
+      <div class="feature__img">
+        <span class="folio">Case Study № 001</span>
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1400&q=90" alt="" />
+      </div>
+      <div class="feature__body">
+        <span class="kicker">§ 03 · Feature</span>
+        <h2 class="feature__title">The <em>Marsh Light</em><br/>House.</h2>
+        <div class="feature__loc">Kiawah Island, South Carolina</div>
+        <p class="feature__text">A modern marsh-front residence clad in cedar and glass, where the brief was simple: make the architecture disappear into the view. Thirty-two Origin OS-44 sliders, custom Kolbe fixed panels, and a full tilt-turn envelope from Lepage.</p>
+        <div class="feature__specs">
+          <div><div class="spec__label">Architect</div><div class="spec__value">Studio W.A.</div></div>
+          <div><div class="spec__label">Builder</div><div class="spec__value">Phillips &amp; Co.</div></div>
+          <div><div class="spec__label">Systems</div><div class="spec__value">Kolbe · Origin · Lepage</div></div>
+          <div><div class="spec__label">Year</div><div class="spec__value">2025</div></div>
+        </div>
+        <a href="#" class="btn">View Full Case Study</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="projects__head">
+      <span class="kicker">§ 04 · Selected Works</span>
+      <h2 style="margin-top:24px">Seen on the coast.</h2>
+      <p>Charleston · Kiawah · Sullivan's Island · Folly Beach</p>
+    </div>
+    <div class="projects__grid">
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=85" alt="" /></div>
+        <div class="proj__meta"><span>№ 001</span><span>2025</span></div>
+        <div class="proj__name">Rutledge Residence</div>
+        <div class="proj__loc">Charleston, SC</div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800&q=85" alt="" /></div>
+        <div class="proj__meta"><span>№ 002</span><span>2025</span></div>
+        <div class="proj__name">Sand Dollar Cottage</div>
+        <div class="proj__loc">Sullivan's Island, SC</div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1613553474179-e1eda3ea5734?w=800&q=85" alt="" /></div>
+        <div class="proj__meta"><span>№ 003</span><span>2024</span></div>
+        <div class="proj__name">Folly Cross House</div>
+        <div class="proj__loc">Folly Beach, SC</div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=85" alt="" /></div>
+        <div class="proj__meta"><span>№ 004</span><span>2024</span></div>
+        <div class="proj__name">Oyster Point</div>
+        <div class="proj__loc">Kiawah Island, SC</div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=85" alt="" /></div>
+        <div class="proj__meta"><span>№ 005</span><span>2024</span></div>
+        <div class="proj__name">Tradd Street House</div>
+        <div class="proj__loc">Charleston, SC</div>
+      </div>
+      <div class="proj">
+        <div class="proj__img"><img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&q=85" alt="" /></div>
+        <div class="proj__meta"><span>№ 006</span><span>2023</span></div>
+        <div class="proj__name">Beach Walk Bungalow</div>
+        <div class="proj__loc">Folly Beach, SC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="values">
+  <div class="container">
+    <div class="values__head">
+      <span class="kicker">§ 05 · Principles</span>
+      <h2>The <em>partner</em><br/>behind the glass.</h2>
+    </div>
+    <div class="values__grid">
+      <div class="val">
+        <span class="val__num">i.</span>
+        <h3 class="val__title">Specification expertise</h3>
+        <p class="val__text">Decades on the Carolina coast means we know the code, the loads, and the subtle decisions that separate a beautiful window from one that survives three hurricanes.</p>
+      </div>
+      <div class="val">
+        <span class="val__num">ii.</span>
+        <h3 class="val__title">Craftsmanship, curated</h3>
+        <p class="val__text">Every line we carry is held to an exacting standard. From raw timber to finished reveal, quality is never a line-item to value-engineer away.</p>
+      </div>
+      <div class="val">
+        <span class="val__num">iii.</span>
+        <h3 class="val__title">Full-service support</h3>
+        <p class="val__text">Design consultation, take-offs, order management, logistics, installation coordination — a single point of accountability from drawing to delivery.</p>
+      </div>
+      <div class="val">
+        <span class="val__num">iv.</span>
+        <h3 class="val__title">Trusted on the coast</h3>
+        <p class="val__text">Architects, GCs, and homeowners return project after project. Our relationships are built on transparency, follow-through, and showing up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="cta">
+  <div class="container">
+    <span class="kicker">§ 06 · Begin</span>
+    <h2 class="cta__title">Show us <em>what</em><br/>you're building.</h2>
+    <div class="cta__actions">
+      <a href="#" class="btn btn--light">Request Consultation →</a>
+      <a href="tel:+18439702146" class="btn btn--light">(843) 970-2146 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div>
+        <div class="footer__brand"><em>Four</em> Corners</div>
+        <div class="footer__tag">Architectural Division — Est. 2002</div>
+        <p class="footer__text">"A window is the hinge between a building and the world it occupies."</p>
+      </div>
+      <div>
+        <div class="footer__heading">Navigate</div>
+        <a href="#" class="footer__link">About</a>
+        <a href="#products" class="footer__link">Products</a>
+        <a href="#projects" class="footer__link">Projects</a>
+        <a href="#" class="footer__link">Journal</a>
+      </div>
+      <div>
+        <div class="footer__heading">The Collection</div>
+        <a href="#" class="footer__link">Kolbe</a>
+        <a href="#" class="footer__link">Lepage</a>
+        <a href="#" class="footer__link">Origin</a>
+        <a href="#" class="footer__link">Quartz</a>
+      </div>
+      <div>
+        <div class="footer__heading">Studio</div>
+        <a href="tel:+18439702146" class="footer__link">(843) 970-2146</a>
+        <a href="mailto:info@buildfcbs.com" class="footer__link">info@buildfcbs.com</a>
+        <p class="footer__link" style="font-size:16px;font-style:italic">3870 Leeds Ave #101<br/>N. Charleston, SC 29405</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div>© MMXXVI — Four Corners Architectural</div>
+      <div>Charleston · Kiawah · Sullivan's Island · Folly Beach</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
