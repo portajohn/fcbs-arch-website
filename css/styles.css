@@ -21,8 +21,8 @@ button, input, textarea, select { font: inherit; }
   --muted: #7c7567;
   --line: #2a2722;
   --line-2: #3a352c;
-  --brass: #c8a26a;
-  --brass-2: #d7b783;
+  --brass: #f06020;
+  --brass-2: #ff8a4c;
   --container: 1400px;
   --section-pad: 140px;
   --section-pad-mobile: 90px;
@@ -232,7 +232,7 @@ em { font-style: italic; color: var(--brass); }
 }
 .cta-band::before {
   content: ""; position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(200,162,106,0.06), transparent 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(240,96,32,0.06), transparent 60%);
   pointer-events: none;
 }
 .cta-band h2 { color: var(--ink); margin-bottom: 20px; position: relative; }
