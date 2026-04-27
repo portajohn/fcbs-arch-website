@@ -2,6 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; scroll-snap-type: y proximity; scroll-padding-top: 72px; }
 .brand-hero, .section, .cta-band { scroll-snap-align: start; }
+@media (pointer: coarse) { html { scroll-snap-type: none; } }
 body {
   font-family: 'Inter', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.6;
   color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased;
