@@ -165,7 +165,8 @@
     .header__right{display:none}
     .hero{padding:120px 24px 40px}
     .hero__content,.products__head,.projects__head,.footer__top{grid-template-columns:1fr;gap:32px}
-    .products__head-right{text-align:left}
+    .products__head,.projects__head{flex-direction:column;align-items:flex-start}
+    .products__head-right{text-align:left;max-width:none}
     .products__grid{grid-template-columns:repeat(3,1fr)}
     .projects__grid{grid-template-columns:1fr 1fr}
     .values__grid{grid-template-columns:1fr 1fr}
@@ -173,12 +174,19 @@
   }
   @media(max-width:640px){
     .container{padding:0 24px}
-    .header{padding:20px 24px}
+    .header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;gap:16px}
+    .header__emblem{height:30px}
+    .header__logo{font-size:18px;gap:10px}
+    .header__logo-wordmark>span{font-size:9px;letter-spacing:.18em}
     .products,.projects,.values{padding:100px 0}
     .products__grid{grid-template-columns:repeat(2,1fr)}
+    .product-card{aspect-ratio:1/1}
+    .product-card__name{font-size:22px}
+    .product-card__body{left:18px;right:18px;bottom:18px}
     .projects__grid,.values__grid{grid-template-columns:1fr}
     .cta__inner{padding:120px 24px}
     .footer{padding:80px 0 32px}
+    .footer__bottom{flex-direction:column;gap:8px;text-align:center}
   }
 </style>
 </head>
@@ -249,7 +257,7 @@
     </div>
     <div class="products__grid">
       <a href="kolbe.html" class="product-card">
-        <div class="product-card__img"><img src="assets/images/kolbe.jpg" alt="Kolbe Windows & Doors" /></div>
+        <div class="product-card__img"><img src="assets/images/kolbe.jpg?v=2" alt="Kolbe Windows & Doors" /></div>
         <div class="product-card__body">
           <div class="product-card__num">01 · Daniel Island</div>
           <div class="product-card__name">Kolbe</div>
@@ -258,7 +266,7 @@
         </div>
       </a>
       <a href="lepage.html" class="product-card">
-        <div class="product-card__img"><img src="assets/images/lepage.jpg" alt="Lepage Millwork" /></div>
+        <div class="product-card__img"><img src="assets/images/lepage.jpg?v=2" alt="Lepage Millwork" /></div>
         <div class="product-card__body">
           <div class="product-card__num">02 · Sullivan's</div>
           <div class="product-card__name">Lepage</div>
@@ -293,8 +301,8 @@
           <span class="product-card__cta">Explore →</span>
         </div>
       </a>
-      <a href="#" class="product-card">
-        <div class="product-card__img"><img src="https://images.unsplash.com/photo-1691517534724-3732c7621407?w=1200&q=85" alt="Exclusive Wood Doors" style="object-position: 30% 30%;" /></div>
+      <a href="ewd.html" class="product-card">
+        <div class="product-card__img"><img src="assets/images/ewd.jpg" alt="Exclusive Wood Doors" /></div>
         <div class="product-card__body">
           <div class="product-card__num">06 · Isle of Palms</div>
           <div class="product-card__name">Exclusive Wood Doors</div>
@@ -423,7 +431,7 @@
         <a href="origin.html" class="footer__link">Origin</a>
         <a href="quartz.html" class="footer__link">Quartz</a>
         <a href="#" class="footer__link">Optimum</a>
-        <a href="#" class="footer__link">Exclusive Wood Doors</a>
+        <a href="ewd.html" class="footer__link">Exclusive Wood Doors</a>
       </div>
       <div>
         <div class="footer__heading">Studio</div>
