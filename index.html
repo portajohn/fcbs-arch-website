@@ -199,7 +199,6 @@
   <nav class="header__nav">
     <a href="#about" class="header__link">About</a>
     <a href="#products" class="header__link">Products</a>
-    <a href="#projects" class="header__link">Projects</a>
     <a href="contact.html" class="header__link">Contact</a>
   </nav>
   <div class="header__right">
@@ -215,7 +214,6 @@
   <button class="mobile-nav__close" aria-label="Close menu">&times;</button>
   <a href="#about" class="mobile-nav__link">About</a>
   <a href="#products" class="mobile-nav__link">Products</a>
-  <a href="#projects" class="mobile-nav__link">Projects</a>
   <a href="contact.html" class="mobile-nav__link">Contact</a>
 </nav>
 
@@ -306,52 +304,55 @@
   </div>
 </section>
 
-<!-- ===== PROJECTS ===== -->
-<section class="projects" id="projects">
-  <div class="container">
-    <div class="projects__head">
-      <div>
-        <span class="kicker">Selected Works</span>
-        <h2 style="margin-top:24px">Seen on <em>the coast</em>.</h2>
+<!-- ===== PROJECTS (parked — restore when install photos are in) ===== -->
+<!-- Contents below sit inside a <template> so the browser parses them but does not render or fetch their images. To reactivate: (1) unwrap by removing the <template> open and close tags, (2) re-add the 'Projects' link to the header nav, mobile nav, and footer Navigate on all 7 HTML pages (see git history for prior markup). -->
+<template id="projects-section-parked">
+  <!-- ===== PROJECTS ===== -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="projects__head">
+        <div>
+          <span class="kicker">Selected Works</span>
+          <h2 style="margin-top:24px">Seen on <em>the coast</em>.</h2>
+        </div>
+      </div>
+      <div class="projects__grid">
+        <div class="proj">
+          <img src="assets/images/project-1.jpg" alt="Rutledge Residence, Charleston SC" />
+          <div class="proj__overlay">
+            <div class="proj__num">N° 001 · 2025</div>
+            <div class="proj__name">Rutledge Residence</div>
+            <div class="proj__loc">Charleston, SC</div>
+          </div>
+        </div>
+        <div class="proj">
+          <img src="assets/images/project-2.jpg" alt="Sand Dollar Cottage, Sullivan's Island SC" />
+          <div class="proj__overlay">
+            <div class="proj__num">N° 002 · 2025</div>
+            <div class="proj__name">Sand Dollar Cottage</div>
+            <div class="proj__loc">Sullivan's Island, SC</div>
+          </div>
+        </div>
+        <div class="proj">
+          <img src="assets/images/project-3.jpg" alt="Folly Cross House, Folly Beach SC" />
+          <div class="proj__overlay">
+            <div class="proj__num">N° 003 · 2024</div>
+            <div class="proj__name">Folly Cross House</div>
+            <div class="proj__loc">Folly Beach, SC</div>
+          </div>
+        </div>
+        <div class="proj">
+          <img src="assets/images/gallery-1.jpg" alt="Oyster Point, Kiawah Island SC" />
+          <div class="proj__overlay">
+            <div class="proj__num">N° 004 · 2024</div>
+            <div class="proj__name">Oyster Point</div>
+            <div class="proj__loc">Kiawah Island, SC</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="projects__grid">
-      <div class="proj">
-        <img src="assets/images/project-1.jpg" alt="Rutledge Residence, Charleston SC" />
-        <div class="proj__overlay">
-          <div class="proj__num">N° 001 · 2025</div>
-          <div class="proj__name">Rutledge Residence</div>
-          <div class="proj__loc">Charleston, SC</div>
-        </div>
-      </div>
-      <div class="proj">
-        <img src="assets/images/project-2.jpg" alt="Sand Dollar Cottage, Sullivan's Island SC" />
-        <div class="proj__overlay">
-          <div class="proj__num">N° 002 · 2025</div>
-          <div class="proj__name">Sand Dollar Cottage</div>
-          <div class="proj__loc">Sullivan's Island, SC</div>
-        </div>
-      </div>
-      <div class="proj">
-        <img src="assets/images/project-3.jpg" alt="Folly Cross House, Folly Beach SC" />
-        <div class="proj__overlay">
-          <div class="proj__num">N° 003 · 2024</div>
-          <div class="proj__name">Folly Cross House</div>
-          <div class="proj__loc">Folly Beach, SC</div>
-        </div>
-      </div>
-      <div class="proj">
-        <img src="assets/images/gallery-1.jpg" alt="Oyster Point, Kiawah Island SC" />
-        <div class="proj__overlay">
-          <div class="proj__num">N° 004 · 2024</div>
-          <div class="proj__name">Oyster Point</div>
-          <div class="proj__loc">Kiawah Island, SC</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+  </section>
+</template>
 <!-- ===== VALUES ===== -->
 <section class="values" id="about">
   <div class="container">
@@ -413,7 +414,6 @@
         <div class="footer__heading">Navigate</div>
         <a href="#about" class="footer__link">About</a>
         <a href="#products" class="footer__link">Products</a>
-        <a href="#projects" class="footer__link">Projects</a>
         <a href="contact.html" class="footer__link">Contact</a>
       </div>
       <div>
