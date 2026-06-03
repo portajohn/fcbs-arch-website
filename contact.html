@@ -33,6 +33,9 @@
     .contact-grid .contact-info__label { font-size: 10px; }
     .contact-grid .contact-info__value { font-size: 15px; }
     .contact-grid iframe { height: 220px !important; margin-top: 16px !important; }
+    .contact-form__status { margin-top: 4px; font-size: 14px; line-height: 1.5; max-width: 380px; }
+    .contact-form__status--ok { color: var(--brass); }
+    .contact-form__status--err { color: #e07060; }
   </style>
 </head>
 <body>
@@ -73,7 +76,10 @@
           <h2>Send Us a Message</h2>
           <p style="color: var(--text-secondary); margin-bottom: 32px;">Fill out the form below and a member of our team will be in touch within one business day.</p>
 
-          <form class="contact-form" novalidate>
+          <form class="contact-form" action="https://formspree.io/f/meewjyjl" method="POST" novalidate>
+
+            <input type="hidden" name="_subject" value="New inquiry — Four Corners Architectural" />
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
 
             <div class="form-group">
               <label for="name">Full Name</label>
@@ -108,6 +114,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">SEND MESSAGE</button>
+            <p class="contact-form__status" role="status" aria-live="polite" hidden></p>
 
           </form>
         </div>
