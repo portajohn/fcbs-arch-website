@@ -173,6 +173,9 @@
   }
   @media(max-width:640px){
     .container{padding:0 24px}
+    /* Mobile hero cleanup — hide hero CTAs + stat block for a clean first load */
+    .hero__actions{display:none}
+    .hero__aside{display:none}
     .header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;gap:16px}
     .header__emblem{height:30px}
     .header__logo{font-size:18px;gap:10px}
