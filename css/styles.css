@@ -152,7 +152,7 @@ em { font-style: italic; color: var(--brass); }
 
 /* ===== HERO (homepage uses inline hero; keep legacy class for fallback) ===== */
 .hero {
-  position: relative; height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; height: 100vh; height: 100svh; display: flex; align-items: center; justify-content: center;
   overflow: hidden; color: var(--ink); text-align: center;
 }
 .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; filter: brightness(.55) saturate(.85); }
