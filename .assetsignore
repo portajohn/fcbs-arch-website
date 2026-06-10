@@ -1,0 +1,15 @@
+# Cloudflare Workers static-assets deploy exclusions.
+# wrangler.jsonc publishes everything in "." minus this list — keep docs,
+# design references, and tooling off the public site.
+
+.git/
+.claude/
+.gitignore
+.assetsignore
+.tmp-*
+CLAUDE.md
+design-handoff/
+docs/
+wrangler.jsonc
+node_modules/
+.wrangler/
