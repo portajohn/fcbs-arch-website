@@ -70,3 +70,6 @@ Phone `(843) 970-2146`, email `info@buildfcbs.com`, address `3870 Leeds Ave #101
 _Append a line here every time Claude gets something wrong in this repo._
 
 - (none currently — the stale hero brand list was fixed 2026-06-10)
+- `_headers` sets a strict CSP whose `frame-src` allows **only `https://www.google.com`**. The
+  contact-page map iframe must use that exact host — a `maps.google.com` URL is silently blocked
+  in production (it renders fine locally, where `_headers` isn't applied). Fixed 2026-07-22.
