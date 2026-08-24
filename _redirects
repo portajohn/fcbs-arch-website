@@ -1,0 +1,5 @@
+# Cloudflare static-asset redirects. Consumed at deploy (like _headers),
+# not served as a file. The trim catalog is its own worker
+# (fc-trim-catalog) mounted at trim.fcarchitectural.com.
+/trim https://trim.fcarchitectural.com/ 301
+/trim/* https://trim.fcarchitectural.com/:splat 301
