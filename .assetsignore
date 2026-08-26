@@ -8,6 +8,7 @@
 .assetsignore
 .tmp-*
 CLAUDE.md
+README.md
 design-handoff/
 docs/
 wrangler.jsonc
